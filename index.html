@@ -1,0 +1,2361 @@
+﻿<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f3e8" />
+    <title>קיר הבית | ארגון משפחתי</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+:root {
+  color-scheme: light;
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --surface-2: #eef5f2;
+  --ink: #202733;
+  --muted: #697386;
+  --line: #dbe3ea;
+  --teal: #0f9f8d;
+  --teal-dark: #067969;
+  --coral: #f0654f;
+  --blue: #477fd2;
+  --amber: #e9a72f;
+  --rose: #d95c83;
+  --green: #48a26d;
+  --shadow: 0 18px 45px rgba(32, 39, 51, 0.08);
+  --radius: 8px;
+  font-family:
+    "Segoe UI",
+    "Arial",
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(71, 127, 210, 0.08), transparent 330px),
+    var(--bg);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.54;
+}
+
+a {
+  color: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 22px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 18px;
+}
+
+.sidebar {
+  position: sticky;
+  top: 18px;
+  height: calc(100vh - 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.brand-mark {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: var(--radius);
+  color: #fff;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+}
+
+.brand h1,
+.brand p {
+  margin: 0;
+}
+
+.brand h1 {
+  font-size: 1.35rem;
+}
+
+.brand p {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.nav {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.nav-button {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 8px 10px;
+  color: var(--muted);
+  border-radius: var(--radius);
+  background: transparent;
+  text-align: right;
+}
+
+.nav-button:hover,
+.nav-button.active {
+  color: var(--ink);
+  background: #edf6f5;
+}
+
+.nav-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #f1f4f8;
+  font-weight: 800;
+}
+
+.nav-button.active .nav-icon {
+  color: #fff;
+  background: var(--teal);
+}
+
+.pill-count {
+  min-width: 28px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: var(--teal-dark);
+  background: #dff4ef;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.family-strip {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.mini-profile {
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: #f8fafc;
+}
+
+.mini-profile.active {
+  border-color: var(--teal);
+  background: #edf8f5;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 800;
+  background: var(--avatar, var(--teal));
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar.large {
+  width: 70px;
+  height: 70px;
+  font-size: 1.35rem;
+}
+
+.mini-profile b,
+.mini-profile span {
+  display: block;
+}
+
+.mini-profile span,
+.quiet {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.main {
+  min-width: 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(12px);
+}
+
+.topbar-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.topbar h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.today-chip,
+.status-chip,
+.source-chip,
+.role-chip,
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-size: 0.86rem;
+}
+
+.today-chip {
+  color: #374151;
+  background: #eef2f7;
+}
+
+.status-chip {
+  color: #fff;
+  background: var(--teal);
+}
+
+.status-chip.warn {
+  background: var(--amber);
+  color: #2c2617;
+}
+
+.source-chip {
+  color: #245e54;
+  background: #e0f4ef;
+}
+
+.source-chip.mail {
+  color: #7d3550;
+  background: #fae5ee;
+}
+
+.role-chip.owner {
+  color: #fff;
+  background: var(--ink);
+}
+
+.role-chip.admin {
+  color: #fff;
+  background: var(--blue);
+}
+
+.role-chip.user {
+  color: #215b3c;
+  background: #dff3e8;
+}
+
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.view {
+  display: grid;
+  gap: 18px;
+}
+
+.hero-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: 18px;
+  min-height: 280px;
+}
+
+.hero-copy,
+.toolbar,
+.form-panel,
+.calendar-day,
+.task-item,
+.mail-item,
+.member-row,
+.event-row,
+.kid-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.panel {
+  padding: 0;
+}
+
+.hero-copy {
+  position: relative;
+  overflow: hidden;
+  padding: 28px;
+  background:
+    linear-gradient(135deg, rgba(15, 159, 141, 0.18), rgba(71, 127, 210, 0.15)),
+    var(--surface);
+}
+
+.hero-copy::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 0;
+  bottom: 0;
+  width: min(360px, 45%);
+  height: 100%;
+  opacity: 0.9;
+  background:
+    linear-gradient(150deg, transparent 32%, rgba(255, 255, 255, 0.65) 32% 36%, transparent 36%),
+    linear-gradient(28deg, rgba(240, 101, 79, 0.18) 0 34%, transparent 34%),
+    linear-gradient(330deg, rgba(233, 167, 47, 0.25) 0 42%, transparent 42%);
+}
+
+.hero-copy > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-copy h2 {
+  max-width: 620px;
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 4vw, 4.2rem);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.hero-copy p {
+  max-width: 620px;
+  margin: 0;
+  color: #3f4d5f;
+  font-size: 1.04rem;
+  line-height: 1.75;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.metric {
+  min-height: 96px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.metric strong {
+  display: block;
+  font-size: 1.8rem;
+}
+
+.metric span {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.panel {
+  padding: 0;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.panel-header h3,
+.form-panel h3,
+.section-title {
+  margin: 0;
+  font-size: 1.08rem;
+}
+
+.stack {
+  display: grid;
+  gap: 10px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.5fr);
+  gap: 18px;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+}
+
+.segmented,
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: #4b5563;
+  background: #fff;
+}
+
+.chip.active {
+  color: #fff;
+  border-color: var(--teal);
+  background: var(--teal);
+}
+
+.icon-button {
+  width: 38px;
+  height: 38px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: var(--radius);
+  color: var(--ink);
+  background: #eef2f7;
+}
+
+.icon-button:hover {
+  background: #e2e9f1;
+}
+
+.primary-button,
+.secondary-button,
+.danger-button {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: var(--radius);
+  font-weight: 700;
+}
+
+.primary-button {
+  color: #fff;
+  background: var(--teal);
+}
+
+.primary-button:hover {
+  background: var(--teal-dark);
+}
+
+.secondary-button {
+  color: var(--ink);
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+.secondary-button:hover {
+  background: #f1f5f9;
+}
+
+.danger-button {
+  color: #9a3412;
+  background: #ffedd5;
+}
+
+.danger-button:hover {
+  background: #fed7aa;
+}
+
+.form-panel {
+  padding: 18px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.form-grid.one {
+  grid-template-columns: 1fr;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.field label,
+.choice-label {
+  color: #3f4d5f;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 9px 11px;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+}
+
+.textarea {
+  min-height: 86px;
+  resize: vertical;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(15, 159, 141, 0.16);
+}
+
+.checks {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.check-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.check-pill input {
+  accent-color: var(--teal);
+}
+
+.task-list,
+.mail-list,
+.event-list,
+.member-list,
+.kid-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.task-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: start;
+  padding: 14px;
+}
+
+.task-item.done {
+  opacity: 0.62;
+}
+
+.task-toggle {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  color: #fff;
+  background: #fff;
+}
+
+.task-item.done .task-toggle {
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.task-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.task-title b {
+  font-size: 1rem;
+}
+
+.meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+
+.category-chip {
+  color: #fff;
+  background: var(--cat, var(--teal));
+}
+
+.mini-avatars {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.mini-avatars .avatar {
+  width: 28px;
+  height: 28px;
+  margin-inline-start: -8px;
+  border: 2px solid #fff;
+  font-size: 0.74rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.calendar-day {
+  min-height: 210px;
+  padding: 12px;
+}
+
+.calendar-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.calendar-date b {
+  font-size: 0.98rem;
+}
+
+.date-badge {
+  min-width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--blue);
+  font-weight: 800;
+}
+
+.agenda-dot {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  margin-top: 5px;
+  border-radius: 50%;
+  background: var(--cat, var(--teal));
+}
+
+.agenda-item {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr);
+  gap: 8px;
+  padding: 9px 0;
+  border-top: 1px solid #edf1f5;
+}
+
+.agenda-item:first-child {
+  border-top: 0;
+}
+
+.agenda-item b,
+.mail-item b,
+.event-row b {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.kid-card {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.kid-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.kid-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e8edf3;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--avatar, var(--teal));
+}
+
+.mail-item,
+.event-row,
+.member-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+}
+
+.member-row {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.member-actions,
+.row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.integration-status {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.status-box {
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f8fafc;
+}
+
+.status-box b,
+.status-box span {
+  display: block;
+}
+
+.status-box span {
+  color: var(--muted);
+  margin-top: 4px;
+  font-size: 0.88rem;
+}
+
+.empty {
+  display: grid;
+  place-items: center;
+  min-height: 140px;
+  padding: 24px;
+  border: 1px dashed #c8d3dc;
+  border-radius: var(--radius);
+  color: var(--muted);
+  text-align: center;
+  background: #fbfcfe;
+}
+
+.toast {
+  position: fixed;
+  inset-inline-start: 18px;
+  bottom: 18px;
+  z-index: 20;
+  max-width: min(420px, calc(100vw - 36px));
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  color: #fff;
+  background: #202733;
+  box-shadow: var(--shadow);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .layout,
+  .hero-panel,
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+  }
+
+  .nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .nav-button {
+    grid-template-columns: 34px 1fr;
+  }
+
+  .pill-count {
+    display: none;
+  }
+
+  .family-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .calendar-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .layout {
+    padding: 10px;
+    gap: 12px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .brand {
+    align-items: flex-start;
+  }
+
+  .metric-grid,
+  .three-col,
+  .integration-status,
+  .calendar-grid,
+  .form-grid,
+  .checks {
+    grid-template-columns: 1fr;
+  }
+
+  .nav,
+  .family-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .nav-button {
+    grid-template-columns: 34px 1fr auto;
+  }
+
+  .hero-copy {
+    padding: 22px;
+  }
+
+  .hero-copy::after {
+    display: none;
+  }
+
+  .hero-copy h2 {
+    font-size: 2.1rem;
+  }
+
+  .task-item,
+  .mail-item,
+  .event-row,
+  .member-row {
+    grid-template-columns: 1fr;
+  }
+
+  .task-item {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .task-item .row-actions {
+    grid-column: 1 / -1;
+    justify-content: stretch;
+  }
+
+  .row-actions > *,
+  .member-actions > * {
+    flex: 1;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="app" class="app-shell"></div>
+    <script>
+const STORAGE_KEY = "homewall-state-v3";
+const GOOGLE_SCOPES = {
+  profile: ["openid", "email", "profile"],
+  calendar: ["openid", "email", "profile", "https://www.googleapis.com/auth/calendar.readonly"],
+  gmail: ["openid", "email", "profile", "https://www.googleapis.com/auth/gmail.readonly"],
+};
+
+const app = document.querySelector("#app");
+let state = loadState();
+let runtime = {
+  accessToken: "",
+  grantedScopes: new Set(),
+  toastTimer: 0,
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  render();
+});
+
+document.addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-action], [data-view], [data-child-filter], [data-category-filter]");
+  if (!button) return;
+
+  if (button.dataset.view || button.dataset.childFilter || button.dataset.categoryFilter) {
+    if (button.dataset.view) state.ui.view = button.dataset.view;
+    if (button.dataset.childFilter) state.ui.childFilter = button.dataset.childFilter;
+    if (button.dataset.categoryFilter) state.ui.categoryFilter = button.dataset.categoryFilter;
+    saveState();
+    render();
+    return;
+  }
+
+  const { action } = button.dataset;
+
+  if (action === "toggle-task") {
+    toggleTask(button.dataset.id);
+  }
+
+  if (action === "delete-task") {
+    deleteTask(button.dataset.id);
+  }
+
+  if (action === "open-task-form") {
+    state.ui.view = "tasks";
+    saveState();
+    render();
+    document.querySelector("#task-title")?.focus();
+  }
+
+  if (action === "save-settings") {
+    const clientId = document.querySelector("#google-client-id")?.value.trim() || "";
+    const gmailQuery = document.querySelector("#gmail-query")?.value.trim() || "newer_than:21d";
+    state.settings.googleClientId = clientId;
+    state.settings.gmailQuery = gmailQuery;
+    saveState();
+    toast("׳”׳’׳“׳¨׳•׳× Google ׳ ׳©׳׳¨׳•");
+    render();
+  }
+
+  if (action === "google-signin") {
+    await signInGoogle();
+  }
+
+  if (action === "sync-calendar") {
+    await syncCalendar();
+  }
+
+  if (action === "sync-gmail") {
+    await syncGmail();
+  }
+
+  if (action === "logout") {
+    runtime.accessToken = "";
+    runtime.grantedScopes.clear();
+    state.currentUserEmail = "";
+    saveState();
+    toast("׳”׳×׳ ׳×׳§׳× ׳׳”׳—׳©׳‘׳•׳ ׳‘׳׳₪׳׳™׳§׳¦׳™׳”");
+    render();
+  }
+
+  if (action === "import-event") {
+    importEventAsTask(button.dataset.id);
+  }
+
+  if (action === "mail-to-task") {
+    importMailAsTask(button.dataset.id);
+  }
+
+  if (action === "remove-member") {
+    removeMember(button.dataset.id);
+  }
+
+  if (action === "set-role") {
+    setMemberRole(button.dataset.id, button.dataset.role);
+  }
+});
+
+document.addEventListener("submit", (event) => {
+  if (event.target.id === "task-form") {
+    event.preventDefault();
+    addTaskFromForm(event.target);
+  }
+
+  if (event.target.id === "member-form") {
+    event.preventDefault();
+    addMemberFromForm(event.target);
+  }
+});
+
+document.addEventListener("input", (event) => {
+  if (event.target.id === "task-search") {
+    state.ui.search = event.target.value;
+    saveState();
+    renderTaskListOnly();
+  }
+});
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return normalizeState(JSON.parse(raw));
+  } catch (error) {
+    console.warn(error);
+  }
+  return makeInitialState();
+}
+
+function normalizeState(saved) {
+  const base = makeInitialState();
+  return {
+    ...base,
+    ...saved,
+    settings: { ...base.settings, ...(saved.settings || {}) },
+    sync: { ...base.sync, ...(saved.sync || {}) },
+    ui: { ...base.ui, ...(saved.ui || {}) },
+    children: saved.children?.length ? saved.children : base.children,
+    categories: saved.categories?.length ? saved.categories : base.categories,
+    tasks: saved.tasks?.length ? saved.tasks : base.tasks,
+    members: saved.members?.length ? saved.members : base.members,
+    calendarEvents: saved.calendarEvents || [],
+    mailItems: saved.mailItems || [],
+  };
+}
+
+function makeInitialState() {
+  return {
+    currentUserEmail: "",
+    settings: {
+      googleClientId: "",
+      gmailQuery: "newer_than:21d (׳¨׳•׳₪׳ OR ׳‘׳™׳× ׳¡׳₪׳¨ OR ׳—׳•׳’ OR ׳©׳‘׳× OR ׳—׳’)",
+    },
+    sync: {
+      calendarLastSync: "",
+      gmailLastSync: "",
+      calendarStatus: "׳׳ ׳׳—׳•׳‘׳¨",
+      gmailStatus: "׳׳ ׳׳—׳•׳‘׳¨",
+    },
+    ui: {
+      view: "home",
+      childFilter: "all",
+      categoryFilter: "all",
+      search: "",
+    },
+    children: [
+      { id: "omer", name: "׳¢׳•׳׳¨", age: 9, color: "#477fd2", initials: "׳¢׳•" },
+      { id: "elia", name: "׳׳׳™׳”", age: 7, color: "#d95c83", initials: "׳׳" },
+      { id: "roni", name: "׳¨׳•׳ ׳™", age: 3, color: "#0f9f8d", initials: "׳¨׳•" },
+    ],
+    categories: [
+      { id: "activities", name: "׳—׳•׳’׳™׳", color: "#477fd2" },
+      { id: "medical", name: "׳¨׳•׳₪׳ / ׳¨׳₪׳•׳׳”", color: "#d95c83" },
+      { id: "school", name: "׳‘׳™׳× ׳¡׳₪׳¨ / ׳׳™׳¨׳•׳¢׳™׳", color: "#e9a72f" },
+      { id: "family", name: "׳©׳‘׳× / ׳—׳’׳™׳ / ׳׳©׳₪׳—׳”", color: "#0f9f8d" },
+    ],
+    tasks: [
+      {
+        id: uid(),
+        title: "׳׳”׳‘׳™׳ ׳—׳•׳׳¦׳× ׳¡׳₪׳•׳¨׳˜ ׳׳—׳•׳’ ׳›׳“׳•׳¨׳’׳",
+        categoryId: "activities",
+        childIds: ["omer"],
+        dueDate: localISO(1),
+        dueTime: "16:30",
+        priority: "׳¨׳’׳™׳׳”",
+        status: "open",
+        notes: "׳׳‘׳“׳•׳§ ׳©׳”׳‘׳§׳‘׳•׳§ ׳‘׳×׳™׳§.",
+        source: "׳׳©׳₪׳—׳”",
+        createdBy: "׳ ׳™׳”׳•׳ ׳׳§׳•׳׳™",
+      },
+      {
+        id: uid(),
+        title: "׳׳™׳©׳•׳¨ ׳”׳•׳¨׳™׳ ׳׳˜׳™׳•׳ ׳‘׳™׳× ׳¡׳₪׳¨",
+        categoryId: "school",
+        childIds: ["elia"],
+        dueDate: localISO(2),
+        dueTime: "08:00",
+        priority: "׳’׳‘׳•׳”׳”",
+        status: "open",
+        notes: "׳׳”׳—׳–׳™׳¨ ׳׳׳—׳ ׳›׳× ׳‘׳‘׳•׳§׳¨.",
+        source: "׳׳©׳₪׳—׳”",
+        createdBy: "׳ ׳™׳”׳•׳ ׳׳§׳•׳׳™",
+      },
+      {
+        id: uid(),
+        title: "׳׳§׳‘׳•׳¢ ׳×׳•׳¨ ׳׳¨׳•׳₪׳ ׳™׳׳“׳™׳",
+        categoryId: "medical",
+        childIds: ["roni"],
+        dueDate: localISO(3),
+        dueTime: "11:15",
+        priority: "׳’׳‘׳•׳”׳”",
+        status: "open",
+        notes: "׳׳¢׳§׳‘ ׳׳—׳¨׳™ ׳©׳™׳¢׳•׳.",
+        source: "׳׳©׳₪׳—׳”",
+        createdBy: "׳ ׳™׳”׳•׳ ׳׳§׳•׳׳™",
+      },
+      {
+        id: uid(),
+        title: "׳¨׳©׳™׳׳× ׳§׳ ׳™׳•׳× ׳׳©׳‘׳× ׳׳¦׳ ׳¡׳‘׳×׳",
+        categoryId: "family",
+        childIds: ["omer", "elia", "roni"],
+        dueDate: localISO(5),
+        dueTime: "13:00",
+        priority: "׳¨׳’׳™׳׳”",
+        status: "open",
+        notes: "׳—׳׳•׳×, ׳©׳×׳™׳™׳”, ׳‘׳’׳“׳™׳ ׳׳”׳—׳׳₪׳”.",
+        source: "׳׳©׳₪׳—׳”",
+        createdBy: "׳ ׳™׳”׳•׳ ׳׳§׳•׳׳™",
+      },
+    ],
+    members: [
+      {
+        id: uid(),
+        email: "owner@gmail.com",
+        name: "׳׳“׳׳™׳ ׳׳©׳₪׳—׳”",
+        role: "owner",
+        status: "׳₪׳¢׳™׳",
+        picture: "",
+        lastActive: new Date().toISOString(),
+      },
+    ],
+    calendarEvents: [],
+    mailItems: [],
+  };
+}
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function render() {
+  app.innerHTML = `
+    <div class="layout">
+      ${renderSidebar()}
+      <main class="main">
+        ${renderTopbar()}
+        ${renderView()}
+      </main>
+    </div>
+    <div id="toast-region" aria-live="polite"></div>
+  `;
+}
+
+function renderSidebar() {
+  const taskCount = state.tasks.filter((task) => task.status !== "done").length;
+  const mailCount = state.mailItems.length;
+  const eventCount = state.calendarEvents.length;
+  const nav = [
+    { id: "home", icon: "ג‚", label: "׳‘׳™׳×", count: taskCount },
+    { id: "calendar", icon: "ג–¡", label: "׳׳•׳— ׳©׳ ׳”", count: eventCount },
+    { id: "tasks", icon: "ג“", label: "׳׳©׳™׳׳•׳×", count: taskCount },
+    { id: "kids", icon: "ג—", label: "׳™׳׳“׳™׳", count: state.children.length },
+    { id: "sync", icon: "ג†»", label: "׳¡׳ ׳›׳¨׳•׳", count: mailCount + eventCount },
+    { id: "users", icon: "ג™™", label: "׳׳©׳×׳׳©׳™׳", count: state.members.length },
+  ];
+
+  return `
+    <aside class="sidebar">
+      <section class="brand" aria-label="׳©׳ ׳”׳׳₪׳׳™׳§׳¦׳™׳”">
+        <div>
+          <h1>׳§׳™׳¨ ׳”׳‘׳™׳×</h1>
+          <p>׳׳©׳™׳׳•׳×, ׳™׳•׳׳ ׳•׳׳™׳™׳׳™׳ ׳‘׳׳§׳•׳ ׳׳—׳“</p>
+        </div>
+        <div class="brand-mark">KH</div>
+      </section>
+
+      <nav class="nav" aria-label="׳ ׳™׳•׳•׳˜ ׳¨׳׳©׳™">
+        ${nav
+          .map(
+            (item) => `
+              <button class="nav-button ${state.ui.view === item.id ? "active" : ""}" data-view="${item.id}">
+                <span class="nav-icon" aria-hidden="true">${item.icon}</span>
+                <span>${item.label}</span>
+                <span class="pill-count">${item.count}</span>
+              </button>
+            `,
+          )
+          .join("")}
+      </nav>
+
+      <section class="family-strip" aria-label="׳₪׳¨׳•׳₪׳™׳׳™ ׳™׳׳“׳™׳">
+        ${state.children.map((child) => renderMiniProfile(child)).join("")}
+      </section>
+    </aside>
+  `;
+}
+
+function renderMiniProfile(child) {
+  const openTasks = tasksForChild(child.id).filter((task) => task.status !== "done").length;
+  return `
+    <button class="mini-profile ${state.ui.childFilter === child.id ? "active" : ""}" data-view="tasks" data-child-filter="${child.id}">
+      <span class="avatar" style="--avatar:${child.color}">${child.initials}</span>
+      <span>
+        <b>${escapeHTML(child.name)}</b>
+        <span>׳’׳™׳ ${child.age}</span>
+      </span>
+      <span class="pill-count">${openTasks}</span>
+    </button>
+  `;
+}
+
+function renderTopbar() {
+  const current = currentMember();
+  const title = viewTitle(state.ui.view);
+  return `
+    <header class="topbar">
+      <div class="topbar-title">
+        <span class="today-chip">${formatLongDate(new Date())}</span>
+        <h2>${title}</h2>
+      </div>
+      <div class="user-box">
+        ${
+          current
+            ? `
+              <span class="avatar" style="--avatar:${current.picture ? "transparent" : "#202733"}">
+                ${current.picture ? `<img src="${current.picture}" alt="">` : initials(current.name || current.email)}
+              </span>
+              <span>
+                <b>${escapeHTML(current.name || current.email)}</b>
+                <span class="quiet">${roleLabel(current.role)}</span>
+              </span>
+              <button class="icon-button" title="׳”׳×׳ ׳×׳§׳•׳×" data-action="logout">ג†×</button>
+            `
+            : `
+              <button class="secondary-button" data-view="sync">׳›׳ ׳™׳¡׳” ׳¢׳ Gmail</button>
+            `
+        }
+      </div>
+    </header>
+  `;
+}
+
+function renderView() {
+  if (state.ui.view === "calendar") return renderCalendarView();
+  if (state.ui.view === "tasks") return renderTasksView();
+  if (state.ui.view === "kids") return renderKidsView();
+  if (state.ui.view === "sync") return renderSyncView();
+  if (state.ui.view === "users") return renderUsersView();
+  return renderHomeView();
+}
+
+function renderHomeView() {
+  const todayItems = agendaItemsForDate(localISO(0));
+  const openTasks = state.tasks.filter((task) => task.status !== "done");
+  const nextMedical = openTasks.filter((task) => task.categoryId === "medical").length;
+  const synced = state.calendarEvents.length + state.mailItems.length;
+  return `
+    <section class="view">
+      <div class="hero-panel">
+        <section class="hero-copy">
+          <span class="status-chip ${state.settings.googleClientId ? "" : "warn"}">
+            ${state.settings.googleClientId ? "Google ׳׳•׳›׳ ׳׳—׳™׳‘׳•׳¨" : "׳ ׳“׳¨׳© Client ID"}
+          </span>
+          <h2>׳”׳׳©׳₪׳—׳” ׳©׳׳, ׳׳¡׳•׳“׳¨׳× ׳׳₪׳™ ׳™׳׳“׳™׳.</h2>
+          <p>׳¢׳•׳׳¨, ׳׳׳™׳” ׳•׳¨׳•׳ ׳™ ׳׳§׳‘׳׳™׳ ׳₪׳¨׳•׳₪׳™׳ ׳‘׳¨׳•׳¨, ׳׳©׳™׳׳•׳× ׳׳©׳•׳™׳›׳•׳× ׳•׳™׳•׳׳ ׳׳©׳₪׳—׳×׳™ ׳©׳׳•׳›׳ ׳׳”׳¡׳×׳ ׳›׳¨׳ ׳¢׳ Gmail ׳•-Google Calendar.</p>
+          <div class="metric-grid">
+            ${renderMetric(openTasks.length, "׳׳©׳™׳׳•׳× ׳₪׳×׳•׳—׳•׳×")}
+            ${renderMetric(todayItems.length, "׳׳”׳™׳•׳")}
+            ${renderMetric(nextMedical, "׳¨׳₪׳•׳׳”")}
+            ${renderMetric(synced, "׳₪׳¨׳™׳˜׳™׳ ׳׳¡׳•׳ ׳›׳¨׳ ׳™׳")}
+          </div>
+        </section>
+        <section class="panel">
+          <div class="panel-header">
+            <h3>׳”׳™׳•׳</h3>
+            <button class="primary-button" data-action="open-task-form">+ ׳׳©׳™׳׳”</button>
+          </div>
+          <div class="stack">
+            ${todayItems.length ? todayItems.map(renderAgendaItem).join("") : renderEmpty("׳׳™׳ ׳׳©׳™׳׳•׳× ׳׳• ׳׳™׳¨׳•׳¢׳™׳ ׳׳”׳™׳•׳")}
+          </div>
+        </section>
+      </div>
+
+      <div class="two-col">
+        <section class="panel">
+          <div class="panel-header">
+            <h3>׳׳₪׳™ ׳™׳׳“</h3>
+            <button class="secondary-button" data-view="kids">׳›׳ ׳”׳₪׳¨׳•׳₪׳™׳׳™׳</button>
+          </div>
+          <div class="three-col">
+            ${state.children.map((child) => renderKidSummary(child)).join("")}
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>׳׳™׳™׳׳™׳ ׳׳—׳¨׳•׳ ׳™׳</h3>
+            <button class="secondary-button" data-view="sync">׳¡׳ ׳›׳¨׳•׳</button>
+          </div>
+          <div class="mail-list">
+            ${state.mailItems.slice(0, 4).map(renderMailItem).join("") || renderEmpty("׳¢׳“׳™׳™׳ ׳׳™׳ ׳׳™׳™׳׳™׳ ׳׳¡׳•׳ ׳›׳¨׳ ׳™׳")}
+          </div>
+        </section>
+      </div>
+    </section>
+  `;
+}
+
+function renderMetric(value, label) {
+  return `
+    <div class="metric">
+      <strong>${value}</strong>
+      <span>${label}</span>
+    </div>
+  `;
+}
+
+function renderKidSummary(child) {
+  const tasks = tasksForChild(child.id);
+  const open = tasks.filter((task) => task.status !== "done").length;
+  const done = tasks.length - open;
+  const percent = tasks.length ? Math.round((done / tasks.length) * 100) : 0;
+  return `
+    <article class="kid-card">
+      <div class="kid-top">
+        <div class="kid-identity">
+          <span class="avatar large" style="--avatar:${child.color}">${child.initials}</span>
+          <span>
+            <b>${escapeHTML(child.name)}</b>
+            <span class="quiet">׳’׳™׳ ${child.age}</span>
+          </span>
+        </div>
+        <span class="pill-count">${open}</span>
+      </div>
+      <div class="progress" style="--avatar:${child.color}"><span style="width:${percent}%"></span></div>
+      <button class="secondary-button" data-view="tasks" data-child-filter="${child.id}">׳׳©׳™׳׳•׳× ׳©׳ ${escapeHTML(child.name)}</button>
+    </article>
+  `;
+}
+
+function renderCalendarView() {
+  const days = Array.from({ length: 7 }, (_, index) => addDays(new Date(), index));
+  return `
+    <section class="view">
+      <div class="toolbar">
+        <button class="primary-button" data-action="sync-calendar">ג†» ׳¡׳ ׳›׳¨׳•׳ ׳™׳•׳׳</button>
+        <button class="secondary-button" data-view="sync">׳”׳’׳“׳¨׳•׳× Google</button>
+        <span class="quiet">${state.sync.calendarLastSync ? `׳¢׳•׳“׳›׳ ${formatDateTime(state.sync.calendarLastSync)}` : "׳˜׳¨׳ ׳‘׳•׳¦׳¢ ׳¡׳ ׳›׳¨׳•׳"}</span>
+      </div>
+      <div class="calendar-grid">
+        ${days.map(renderCalendarDay).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderCalendarDay(date) {
+  const iso = localISOFromDate(date);
+  const items = agendaItemsForDate(iso);
+  return `
+    <section class="calendar-day">
+      <div class="calendar-date">
+        <b>${weekday(date)}</b>
+        <span class="date-badge">${date.getDate()}</span>
+      </div>
+      <div class="stack">
+        ${items.length ? items.map(renderAgendaItem).join("") : `<span class="quiet">׳₪׳ ׳•׳™</span>`}
+      </div>
+    </section>
+  `;
+}
+
+function renderAgendaItem(item) {
+  const category = categoryById(item.categoryId);
+  return `
+    <div class="agenda-item">
+      <span class="agenda-dot" style="--cat:${category?.color || "#0f9f8d"}"></span>
+      <span>
+        <b>${escapeHTML(item.title)}</b>
+        <span class="quiet">${item.time || "׳›׳ ׳”׳™׳•׳"} ֲ· ${childrenNames(item.childIds)}</span>
+      </span>
+    </div>
+  `;
+}
+
+function renderTasksView() {
+  return `
+    <section class="view">
+      ${renderTaskToolbar()}
+      <div class="two-col">
+        <section class="panel">
+          <div class="panel-header">
+            <h3>׳׳©׳™׳׳•׳×</h3>
+            <span class="quiet">${filteredTasks().length} ׳₪׳¨׳™׳˜׳™׳</span>
+          </div>
+          <div id="task-list-region">
+            ${renderTaskList()}
+          </div>
+        </section>
+        ${renderTaskForm()}
+      </div>
+    </section>
+  `;
+}
+
+function renderTaskToolbar() {
+  return `
+    <div class="toolbar">
+      <div class="segmented" aria-label="׳¡׳™׳ ׳•׳ ׳׳₪׳™ ׳™׳׳“">
+        <button class="chip ${state.ui.childFilter === "all" ? "active" : ""}" data-child-filter="all">׳›׳ ׳”׳™׳׳“׳™׳</button>
+        ${state.children
+          .map(
+            (child) => `
+              <button class="chip ${state.ui.childFilter === child.id ? "active" : ""}" data-child-filter="${child.id}">
+                ${escapeHTML(child.name)}
+              </button>
+            `,
+          )
+          .join("")}
+      </div>
+      <div class="segmented" aria-label="׳¡׳™׳ ׳•׳ ׳׳₪׳™ ׳§׳˜׳’׳•׳¨׳™׳”">
+        <button class="chip ${state.ui.categoryFilter === "all" ? "active" : ""}" data-category-filter="all">׳›׳ ׳”׳§׳˜׳’׳•׳¨׳™׳•׳×</button>
+        ${state.categories
+          .map(
+            (category) => `
+              <button class="chip ${state.ui.categoryFilter === category.id ? "active" : ""}" data-category-filter="${category.id}">
+                ${escapeHTML(category.name)}
+              </button>
+            `,
+          )
+          .join("")}
+      </div>
+      <input id="task-search" class="input" value="${escapeAttr(state.ui.search)}" placeholder="׳—׳™׳₪׳•׳© ׳׳©׳™׳׳”" aria-label="׳—׳™׳₪׳•׳© ׳׳©׳™׳׳”" />
+    </div>
+  `;
+}
+
+function renderTaskListOnly() {
+  const region = document.querySelector("#task-list-region");
+  if (region) region.innerHTML = renderTaskList();
+}
+
+function renderTaskList() {
+  const tasks = filteredTasks();
+  if (!tasks.length) return renderEmpty("׳׳™׳ ׳׳©׳™׳׳•׳× ׳©׳׳×׳׳™׳׳•׳× ׳׳¡׳™׳ ׳•׳");
+  return `<div class="task-list">${tasks.map(renderTaskItem).join("")}</div>`;
+}
+
+function renderTaskItem(task) {
+  const category = categoryById(task.categoryId);
+  return `
+    <article class="task-item ${task.status === "done" ? "done" : ""}">
+      <button class="task-toggle" title="${task.status === "done" ? "׳¡׳׳ ׳›׳₪׳×׳•׳—׳”" : "׳¡׳׳ ׳›׳”׳•׳©׳׳׳”"}" data-action="toggle-task" data-id="${task.id}">
+        ${task.status === "done" ? "ג“" : ""}
+      </button>
+      <div>
+        <div class="task-title">
+          <b>${escapeHTML(task.title)}</b>
+          <span class="category-chip" style="--cat:${category?.color || "#0f9f8d"}">${escapeHTML(category?.name || "׳›׳׳׳™")}</span>
+          ${task.source && task.source !== "׳׳©׳₪׳—׳”" ? `<span class="source-chip">${escapeHTML(task.source)}</span>` : ""}
+        </div>
+        <div class="meta-row">
+          <span>${formatDate(task.dueDate)}${task.dueTime ? ` ֲ· ${task.dueTime}` : ""}</span>
+          <span>${childrenNames(task.childIds)}</span>
+          <span>׳¢׳“׳™׳₪׳•׳× ${escapeHTML(task.priority || "׳¨׳’׳™׳׳”")}</span>
+        </div>
+        ${task.notes ? `<p class="quiet">${escapeHTML(task.notes)}</p>` : ""}
+      </div>
+      <div class="row-actions">
+        <span class="mini-avatars">${task.childIds.map((id) => renderTinyAvatar(id)).join("")}</span>
+        <button class="icon-button" title="׳׳—׳™׳§׳”" data-action="delete-task" data-id="${task.id}">ֳ—</button>
+      </div>
+    </article>
+  `;
+}
+
+function renderTaskForm() {
+  return `
+    <form id="task-form" class="form-panel">
+      <h3>׳׳©׳™׳׳” ׳—׳“׳©׳”</h3>
+      <div class="form-grid">
+        <div class="field full">
+          <label for="task-title">׳›׳•׳×׳¨׳×</label>
+          <input id="task-title" name="title" class="input" required placeholder="׳׳׳©׳ ׳×׳•׳¨ ׳׳¨׳•׳₪׳, ׳—׳•׳’, ׳׳™׳¨׳•׳¢ ׳‘׳™׳× ׳¡׳₪׳¨" />
+        </div>
+        <div class="field">
+          <label for="task-category">׳§׳˜׳’׳•׳¨׳™׳”</label>
+          <select id="task-category" name="categoryId" class="select">
+            ${state.categories.map((category) => `<option value="${category.id}">${escapeHTML(category.name)}</option>`).join("")}
+          </select>
+        </div>
+        <div class="field">
+          <label for="task-priority">׳¢׳“׳™׳₪׳•׳×</label>
+          <select id="task-priority" name="priority" class="select">
+            <option>׳¨׳’׳™׳׳”</option>
+            <option>׳’׳‘׳•׳”׳”</option>
+            <option>׳ ׳׳•׳›׳”</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="task-date">׳×׳׳¨׳™׳</label>
+          <input id="task-date" name="dueDate" class="input" type="date" value="${localISO(0)}" />
+        </div>
+        <div class="field">
+          <label for="task-time">׳©׳¢׳”</label>
+          <input id="task-time" name="dueTime" class="input" type="time" />
+        </div>
+        <div class="field full">
+          <span class="choice-label">׳™׳׳“׳™׳</span>
+          <div class="checks">
+            ${state.children
+              .map(
+                (child) => `
+                  <label class="check-pill">
+                    <input type="checkbox" name="childIds" value="${child.id}" ${state.ui.childFilter === child.id ? "checked" : ""} />
+                    <span class="avatar" style="--avatar:${child.color}; width:28px; height:28px; font-size:.75rem">${child.initials}</span>
+                    <span>${escapeHTML(child.name)}</span>
+                  </label>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+        <div class="field full">
+          <label for="task-notes">׳”׳¢׳¨׳•׳×</label>
+          <textarea id="task-notes" name="notes" class="textarea"></textarea>
+        </div>
+      </div>
+      <button class="primary-button" type="submit">+ ׳”׳•׳¡׳₪׳× ׳׳©׳™׳׳”</button>
+    </form>
+  `;
+}
+
+function renderKidsView() {
+  return `
+    <section class="view">
+      <div class="kid-grid three-col">
+        ${state.children.map(renderKidProfile).join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderKidProfile(child) {
+  const tasks = tasksForChild(child.id).sort(sortTasks);
+  const open = tasks.filter((task) => task.status !== "done");
+  return `
+    <article class="kid-card">
+      <div class="kid-top">
+        <div class="kid-identity">
+          <span class="avatar large" style="--avatar:${child.color}">${child.initials}</span>
+          <span>
+            <b>${escapeHTML(child.name)}</b>
+            <span class="quiet">׳’׳™׳ ${child.age} ֲ· ${open.length} ׳₪׳×׳•׳—׳•׳×</span>
+          </span>
+        </div>
+        <button class="icon-button" title="׳”׳¦׳’׳× ׳׳©׳™׳׳•׳×" data-view="tasks" data-child-filter="${child.id}">ג†’</button>
+      </div>
+      <div class="task-list">
+        ${tasks.slice(0, 5).map(renderTaskItem).join("") || renderEmpty(`׳׳™׳ ׳׳©׳™׳׳•׳× ׳¢׳‘׳•׳¨ ${child.name}`)}
+      </div>
+    </article>
+  `;
+}
+
+function renderSyncView() {
+  const hasClient = Boolean(state.settings.googleClientId);
+  return `
+    <section class="view">
+      <div class="two-col">
+        <section class="form-panel">
+          <h3>׳—׳™׳‘׳•׳¨ Google</h3>
+          <div class="form-grid one">
+            <div class="field">
+              <label for="google-client-id">Google OAuth Client ID</label>
+              <input id="google-client-id" class="input" value="${escapeAttr(state.settings.googleClientId)}" placeholder="1234567890-xxxx.apps.googleusercontent.com" />
+            </div>
+            <div class="field">
+              <label for="gmail-query">׳—׳™׳₪׳•׳© Gmail ׳׳¡׳ ׳›׳¨׳•׳</label>
+              <input id="gmail-query" class="input" value="${escapeAttr(state.settings.gmailQuery)}" />
+            </div>
+            <div class="status-box">
+              <b>Origin ׳׳”׳•׳¡׳₪׳” ׳‘-Google Cloud</b>
+              <span>${escapeHTML(location.origin)}</span>
+            </div>
+          </div>
+          <div class="chip-row" style="margin-top:14px">
+            <button class="primary-button" data-action="save-settings">׳©׳׳™׳¨׳× ׳”׳’׳“׳¨׳•׳×</button>
+            <button class="secondary-button" data-action="google-signin" ${hasClient ? "" : "disabled"}>׳›׳ ׳™׳¡׳” ׳¢׳ Gmail</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h3>׳׳¦׳‘ ׳¡׳ ׳›׳¨׳•׳</h3>
+            <span class="status-chip ${hasClient ? "" : "warn"}">${hasClient ? "׳׳•׳›׳" : "׳—׳¡׳¨ Client ID"}</span>
+          </div>
+          <div class="integration-status">
+            ${renderStatusBox("׳–׳”׳•׳×", currentMember()?.email || "׳׳ ׳׳—׳•׳‘׳¨", currentMember() ? roleLabel(currentMember().role) : "Gmail")}
+            ${renderStatusBox("Google Calendar", state.sync.calendarStatus, state.sync.calendarLastSync ? formatDateTime(state.sync.calendarLastSync) : "׳˜׳¨׳ ׳¢׳•׳“׳›׳")}
+            ${renderStatusBox("Gmail", state.sync.gmailStatus, state.sync.gmailLastSync ? formatDateTime(state.sync.gmailLastSync) : "׳˜׳¨׳ ׳¢׳•׳“׳›׳")}
+          </div>
+          <div class="chip-row" style="margin-top:14px">
+            <button class="primary-button" data-action="sync-calendar" ${hasClient ? "" : "disabled"}>ג†» ׳¡׳ ׳›׳¨׳•׳ ׳™׳•׳׳</button>
+            <button class="primary-button" data-action="sync-gmail" ${hasClient ? "" : "disabled"}>ג†» ׳¡׳ ׳›׳¨׳•׳ Gmail</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="two-col">
+        <section class="panel">
+          <div class="panel-header">
+            <h3>׳׳™׳¨׳•׳¢׳™׳ ׳׳™׳•׳‘׳׳™׳</h3>
+            <span class="quiet">${state.calendarEvents.length} ׳₪׳¨׳™׳˜׳™׳</span>
+          </div>
+          <div class="event-list">
+            ${state.calendarEvents.map(renderCalendarEvent).join("") || renderEmpty("׳׳™׳ ׳׳™׳¨׳•׳¢׳™׳ ׳׳™׳•׳‘׳׳™׳")}
+          </div>
+        </section>
+        <section class="panel">
+          <div class="panel-header">
+            <h3>׳׳™׳™׳׳™׳ ׳׳™׳•׳‘׳׳™׳</h3>
+            <span class="quiet">${state.mailItems.length} ׳₪׳¨׳™׳˜׳™׳</span>
+          </div>
+          <div class="mail-list">
+            ${state.mailItems.map(renderMailItem).join("") || renderEmpty("׳׳™׳ ׳׳™׳™׳׳™׳ ׳׳™׳•׳‘׳׳™׳")}
+          </div>
+        </section>
+      </div>
+    </section>
+  `;
+}
+
+function renderStatusBox(title, value, caption) {
+  return `
+    <div class="status-box">
+      <b>${escapeHTML(title)}</b>
+      <span>${escapeHTML(value)}</span>
+      <span>${escapeHTML(caption)}</span>
+    </div>
+  `;
+}
+
+function renderCalendarEvent(event) {
+  const category = categoryById(event.categoryId);
+  return `
+    <article class="event-row">
+      <div>
+        <b>${escapeHTML(event.title)}</b>
+        <div class="meta-row">
+          <span>${formatDate(event.date)}${event.time ? ` ֲ· ${event.time}` : ""}</span>
+          <span class="category-chip" style="--cat:${category?.color || "#0f9f8d"}">${escapeHTML(category?.name || "׳›׳׳׳™")}</span>
+          <span>${childrenNames(event.childIds)}</span>
+        </div>
+      </div>
+      <button class="secondary-button" data-action="import-event" data-id="${event.id}">׳׳”׳₪׳•׳ ׳׳׳©׳™׳׳”</button>
+    </article>
+  `;
+}
+
+function renderMailItem(mail) {
+  const category = categoryById(mail.categoryId);
+  return `
+    <article class="mail-item">
+      <div>
+        <b>${escapeHTML(mail.subject || "(׳׳׳ ׳ ׳•׳©׳)")}</b>
+        <div class="meta-row">
+          <span>${escapeHTML(mail.from || "Gmail")}</span>
+          <span>${mail.date ? formatDateTime(mail.date) : ""}</span>
+          <span class="source-chip mail">Gmail</span>
+          ${category ? `<span class="category-chip" style="--cat:${category.color}">${escapeHTML(category.name)}</span>` : ""}
+        </div>
+        ${mail.snippet ? `<p class="quiet">${escapeHTML(mail.snippet)}</p>` : ""}
+      </div>
+      <div class="row-actions">
+        ${mail.webLink ? `<a class="secondary-button" href="${mail.webLink}" target="_blank" rel="noreferrer">׳₪׳×׳™׳—׳”</a>` : ""}
+        <button class="secondary-button" data-action="mail-to-task" data-id="${mail.id}">׳׳׳©׳™׳׳”</button>
+      </div>
+    </article>
+  `;
+}
+
+function renderUsersView() {
+  const canManage = canManageUsers();
+  return `
+    <section class="view">
+      <div class="two-col">
+        <section class="panel">
+          <div class="panel-header">
+            <h3>׳׳©׳×׳׳©׳™׳ ׳•׳”׳¨׳©׳׳•׳×</h3>
+            <span class="quiet">${state.members.length} ׳׳©׳×׳׳©׳™׳</span>
+          </div>
+          <div class="member-list">
+            ${state.members.map((member) => renderMemberRow(member, canManage)).join("")}
+          </div>
+        </section>
+        <form id="member-form" class="form-panel">
+          <h3>׳”׳•׳¡׳₪׳× ׳׳©׳×׳׳©</h3>
+          <div class="form-grid one">
+            <div class="field">
+              <label for="member-name">׳©׳</label>
+              <input id="member-name" name="name" class="input" required />
+            </div>
+            <div class="field">
+              <label for="member-email">׳›׳×׳•׳‘׳× Gmail</label>
+              <input id="member-email" name="email" class="input" type="email" required placeholder="name@gmail.com" />
+            </div>
+            <div class="field">
+              <label for="member-role">׳×׳₪׳§׳™׳“</label>
+              <select id="member-role" name="role" class="select">
+                <option value="admin">׳׳“׳׳™׳</option>
+                <option value="user">׳׳©׳×׳׳©</option>
+              </select>
+            </div>
+          </div>
+          <button class="primary-button" type="submit" ${canManage ? "" : "disabled"}>+ ׳”׳•׳¡׳₪׳”</button>
+        </form>
+      </div>
+    </section>
+  `;
+}
+
+function renderMemberRow(member, canManage) {
+  return `
+    <article class="member-row">
+      <span class="avatar" style="--avatar:${member.picture ? "transparent" : "#477fd2"}">
+        ${member.picture ? `<img src="${member.picture}" alt="">` : initials(member.name || member.email)}
+      </span>
+      <div>
+        <b>${escapeHTML(member.name || member.email)}</b>
+        <div class="meta-row">
+          <span>${escapeHTML(member.email)}</span>
+          <span class="role-chip ${member.role}">${roleLabel(member.role)}</span>
+          <span>${escapeHTML(member.status || "׳₪׳¢׳™׳")}</span>
+        </div>
+      </div>
+      <div class="member-actions">
+        <button class="secondary-button" data-action="set-role" data-id="${member.id}" data-role="admin" ${canManage && member.role !== "owner" ? "" : "disabled"}>׳׳“׳׳™׳</button>
+        <button class="secondary-button" data-action="set-role" data-id="${member.id}" data-role="user" ${canManage && member.role !== "owner" ? "" : "disabled"}>׳׳©׳×׳׳©</button>
+        <button class="danger-button" data-action="remove-member" data-id="${member.id}" ${canManage && member.role !== "owner" ? "" : "disabled"}>׳׳—׳™׳§׳”</button>
+      </div>
+    </article>
+  `;
+}
+
+function addTaskFromForm(form) {
+  const formData = new FormData(form);
+  const childIds = formData.getAll("childIds");
+  const task = {
+    id: uid(),
+    title: formData.get("title").trim(),
+    categoryId: formData.get("categoryId"),
+    childIds: childIds.length ? childIds : state.children.map((child) => child.id),
+    dueDate: formData.get("dueDate") || localISO(0),
+    dueTime: formData.get("dueTime") || "",
+    priority: formData.get("priority") || "׳¨׳’׳™׳׳”",
+    status: "open",
+    notes: formData.get("notes").trim(),
+    source: "׳׳©׳₪׳—׳”",
+    createdBy: currentMember()?.email || "׳ ׳™׳”׳•׳ ׳׳§׳•׳׳™",
+  };
+  state.tasks.unshift(task);
+  saveState();
+  toast("׳”׳׳©׳™׳׳” ׳ ׳•׳¡׳₪׳”");
+  render();
+}
+
+function toggleTask(id) {
+  const task = state.tasks.find((item) => item.id === id);
+  if (!task) return;
+  task.status = task.status === "done" ? "open" : "done";
+  saveState();
+  render();
+}
+
+function deleteTask(id) {
+  state.tasks = state.tasks.filter((task) => task.id !== id);
+  saveState();
+  toast("׳”׳׳©׳™׳׳” ׳ ׳׳—׳§׳”");
+  render();
+}
+
+function addMemberFromForm(form) {
+  if (!canManageUsers()) {
+    toast("׳¨׳§ ׳׳“׳׳™׳ ׳™׳›׳•׳ ׳׳”׳•׳¡׳™׳£ ׳׳©׳×׳׳©׳™׳");
+    return;
+  }
+
+  const formData = new FormData(form);
+  const email = String(formData.get("email") || "").trim().toLowerCase();
+  const name = String(formData.get("name") || "").trim();
+  const role = formData.get("role") || "user";
+
+  if (!email.endsWith("@gmail.com")) {
+    toast("׳™׳© ׳׳”׳–׳™׳ ׳›׳×׳•׳‘׳× Gmail");
+    return;
+  }
+
+  if (state.members.some((member) => member.email.toLowerCase() === email)) {
+    toast("׳”׳׳©׳×׳׳© ׳›׳‘׳¨ ׳§׳™׳™׳");
+    return;
+  }
+
+  state.members.push({
+    id: uid(),
+    email,
+    name,
+    role,
+    status: "׳₪׳¢׳™׳",
+    picture: "",
+    lastActive: "",
+  });
+  saveState();
+  toast("׳”׳׳©׳×׳׳© ׳ ׳•׳¡׳£");
+  render();
+}
+
+function setMemberRole(id, role) {
+  if (!canManageUsers()) return toast("׳¨׳§ ׳׳“׳׳™׳ ׳™׳›׳•׳ ׳׳©׳ ׳•׳× ׳”׳¨׳©׳׳•׳×");
+  const member = state.members.find((item) => item.id === id);
+  if (!member || member.role === "owner") return;
+  member.role = role;
+  saveState();
+  render();
+}
+
+function removeMember(id) {
+  if (!canManageUsers()) return toast("׳¨׳§ ׳׳“׳׳™׳ ׳™׳›׳•׳ ׳׳׳—׳•׳§ ׳׳©׳×׳׳©׳™׳");
+  state.members = state.members.filter((member) => member.id !== id || member.role === "owner");
+  saveState();
+  render();
+}
+
+async function signInGoogle() {
+  try {
+    const token = await requestGoogleToken(GOOGLE_SCOPES.profile);
+    await loadGoogleProfile(token.access_token);
+    toast("׳”׳×׳—׳‘׳¨׳× ׳¢׳ Gmail");
+    render();
+  } catch (error) {
+    console.error(error);
+    toast(error.message || "׳”׳›׳ ׳™׳¡׳” ׳ ׳›׳©׳׳”");
+  }
+}
+
+async function syncCalendar() {
+  try {
+    const token = await requestGoogleToken(GOOGLE_SCOPES.calendar);
+    await loadGoogleProfile(token.access_token);
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    const end = addDays(start, 45);
+    const params = new URLSearchParams({
+      timeMin: start.toISOString(),
+      timeMax: end.toISOString(),
+      singleEvents: "true",
+      orderBy: "startTime",
+      maxResults: "30",
+    });
+    const data = await googleFetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?${params}`);
+    state.calendarEvents = (data.items || []).map(mapCalendarEvent);
+    state.sync.calendarLastSync = new Date().toISOString();
+    state.sync.calendarStatus = "׳׳—׳•׳‘׳¨";
+    saveState();
+    toast(`׳¡׳•׳ ׳›׳¨׳ ׳• ${state.calendarEvents.length} ׳׳™׳¨׳•׳¢׳™ ׳™׳•׳׳`);
+    render();
+  } catch (error) {
+    console.error(error);
+    state.sync.calendarStatus = "׳©׳’׳™׳׳”";
+    saveState();
+    toast(error.message || "׳¡׳ ׳›׳¨׳•׳ ׳”׳™׳•׳׳ ׳ ׳›׳©׳");
+    render();
+  }
+}
+
+async function syncGmail() {
+  try {
+    const token = await requestGoogleToken(GOOGLE_SCOPES.gmail);
+    await loadGoogleProfile(token.access_token);
+    const listParams = new URLSearchParams({
+      maxResults: "10",
+      q: state.settings.gmailQuery || "newer_than:21d",
+    });
+    const list = await googleFetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages?${listParams}`);
+    const messages = list.messages || [];
+    const details = await Promise.all(messages.map((message) => loadGmailMessage(message.id)));
+    state.mailItems = details.filter(Boolean).map(mapGmailMessage);
+    state.sync.gmailLastSync = new Date().toISOString();
+    state.sync.gmailStatus = "׳׳—׳•׳‘׳¨";
+    saveState();
+    toast(`׳¡׳•׳ ׳›׳¨׳ ׳• ${state.mailItems.length} ׳׳™׳™׳׳™׳`);
+    render();
+  } catch (error) {
+    console.error(error);
+    state.sync.gmailStatus = "׳©׳’׳™׳׳”";
+    saveState();
+    toast(error.message || "׳¡׳ ׳›׳¨׳•׳ Gmail ׳ ׳›׳©׳");
+    render();
+  }
+}
+
+async function loadGmailMessage(id) {
+  const params = new URLSearchParams({
+    format: "metadata",
+    metadataHeaders: "Subject",
+  });
+  params.append("metadataHeaders", "From");
+  params.append("metadataHeaders", "Date");
+  return googleFetch(`https://gmail.googleapis.com/gmail/v1/users/me/messages/${id}?${params}`);
+}
+
+function requestGoogleToken(scopes) {
+  return new Promise((resolve, reject) => {
+    if (!state.settings.googleClientId) {
+      reject(new Error("׳—׳¡׳¨ Google OAuth Client ID"));
+      return;
+    }
+
+    if (!window.google?.accounts?.oauth2) {
+      reject(new Error("׳¡׳₪׳¨׳™׳™׳× Google ׳¢׳“׳™׳™׳ ׳׳ ׳ ׳˜׳¢׳ ׳”. ׳ ׳¡׳• ׳©׳•׳‘ ׳‘׳¢׳•׳“ ׳¨׳’׳¢."));
+      return;
+    }
+
+    const client = window.google.accounts.oauth2.initTokenClient({
+      client_id: state.settings.googleClientId,
+      scope: scopes.join(" "),
+      hint: state.currentUserEmail || undefined,
+      callback: (response) => {
+        if (response.error) {
+          reject(new Error(response.error_description || response.error));
+          return;
+        }
+        runtime.accessToken = response.access_token;
+        String(response.scope || "")
+          .split(" ")
+          .filter(Boolean)
+          .forEach((scope) => runtime.grantedScopes.add(scope));
+        resolve(response);
+      },
+    });
+
+    client.requestAccessToken({ prompt: state.currentUserEmail ? "" : "consent" });
+  });
+}
+
+async function loadGoogleProfile(accessToken) {
+  const response = await fetch("https://openidconnect.googleapis.com/v1/userinfo", {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+
+  if (!response.ok) {
+    throw new Error("׳׳ ׳”׳¦׳׳—׳×׳™ ׳׳§׳¨׳•׳ ׳׳× ׳₪׳¨׳˜׳™ ׳”׳׳©׳×׳׳© ׳-Google");
+  }
+
+  const profile = await response.json();
+  const email = String(profile.email || "").toLowerCase();
+  if (!email.endsWith("@gmail.com")) {
+    throw new Error("׳”׳—׳©׳‘׳•׳ ׳—׳™׳™׳‘ ׳׳”׳™׳•׳× ׳›׳×׳•׳‘׳× Gmail");
+  }
+
+  state.currentUserEmail = email;
+  const existing = state.members.find((member) => member.email.toLowerCase() === email);
+
+  if (existing) {
+    existing.name = profile.name || existing.name;
+    existing.picture = profile.picture || existing.picture;
+    existing.status = "׳₪׳¢׳™׳";
+    existing.lastActive = new Date().toISOString();
+  } else {
+    state.members.push({
+      id: uid(),
+      email,
+      name: profile.name || email.split("@")[0],
+      role: state.members.some((member) => member.role === "owner" || member.role === "admin") ? "user" : "owner",
+      status: "׳₪׳¢׳™׳",
+      picture: profile.picture || "",
+      lastActive: new Date().toISOString(),
+    });
+  }
+
+  saveState();
+}
+
+async function googleFetch(url) {
+  if (!runtime.accessToken) throw new Error("׳¦׳¨׳™׳ ׳׳”׳×׳—׳‘׳¨ ׳-Google ׳׳—׳“׳©");
+  const response = await fetch(url, {
+    headers: { Authorization: `Bearer ${runtime.accessToken}` },
+  });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new Error(`Google ׳”׳—׳–׳™׳¨׳” ׳©׳’׳™׳׳” (${response.status}): ${text.slice(0, 120)}`);
+  }
+  return response.json();
+}
+
+function mapCalendarEvent(event) {
+  const text = `${event.summary || ""} ${event.description || ""} ${event.location || ""}`;
+  const start = event.start?.dateTime || event.start?.date || "";
+  return {
+    id: event.id,
+    title: event.summary || "׳׳™׳¨׳•׳¢ ׳׳׳ ׳©׳",
+    date: start.slice(0, 10) || localISO(0),
+    time: event.start?.dateTime ? start.slice(11, 16) : "",
+    categoryId: guessCategory(text),
+    childIds: guessChildren(text),
+    source: "Google Calendar",
+    link: event.htmlLink || "",
+  };
+}
+
+function mapGmailMessage(message) {
+  const headers = message.payload?.headers || [];
+  const getHeader = (name) => headers.find((header) => header.name.toLowerCase() === name.toLowerCase())?.value || "";
+  const subject = getHeader("Subject");
+  const from = getHeader("From");
+  const date = getHeader("Date");
+  const parsedDate = date ? new Date(date) : null;
+  const text = `${subject} ${from} ${message.snippet || ""}`;
+  return {
+    id: message.id,
+    threadId: message.threadId,
+    subject,
+    from,
+    date: parsedDate && !Number.isNaN(parsedDate.valueOf()) ? parsedDate.toISOString() : "",
+    snippet: message.snippet || "",
+    categoryId: guessCategory(text),
+    childIds: guessChildren(text),
+    source: "Gmail",
+    webLink: message.threadId ? `https://mail.google.com/mail/u/0/#inbox/${message.threadId}` : "",
+  };
+}
+
+function importEventAsTask(id) {
+  const event = state.calendarEvents.find((item) => item.id === id);
+  if (!event) return;
+  state.tasks.unshift({
+    id: uid(),
+    title: event.title,
+    categoryId: event.categoryId,
+    childIds: event.childIds.length ? event.childIds : state.children.map((child) => child.id),
+    dueDate: event.date,
+    dueTime: event.time,
+    priority: "׳¨׳’׳™׳׳”",
+    status: "open",
+    notes: event.link ? `׳ ׳•׳¦׳¨ ׳׳׳™׳¨׳•׳¢ Google Calendar: ${event.link}` : "׳ ׳•׳¦׳¨ ׳׳׳™׳¨׳•׳¢ Google Calendar",
+    source: "Google Calendar",
+    createdBy: currentMember()?.email || "Google Calendar",
+  });
+  saveState();
+  toast("׳”׳׳™׳¨׳•׳¢ ׳ ׳•׳¡׳£ ׳›׳׳©׳™׳׳”");
+  render();
+}
+
+function importMailAsTask(id) {
+  const mail = state.mailItems.find((item) => item.id === id);
+  if (!mail) return;
+  state.tasks.unshift({
+    id: uid(),
+    title: mail.subject || "׳׳™׳™׳ ׳׳˜׳™׳₪׳•׳",
+    categoryId: mail.categoryId,
+    childIds: mail.childIds.length ? mail.childIds : state.children.map((child) => child.id),
+    dueDate: localISO(1),
+    dueTime: "",
+    priority: "׳¨׳’׳™׳׳”",
+    status: "open",
+    notes: `${mail.from || ""}\n${mail.snippet || ""}`.trim(),
+    source: "Gmail",
+    createdBy: currentMember()?.email || "Gmail",
+  });
+  saveState();
+  toast("׳”׳׳™׳™׳ ׳ ׳•׳¡׳£ ׳›׳׳©׳™׳׳”");
+  render();
+}
+
+function filteredTasks() {
+  const query = (state.ui.search || "").trim().toLowerCase();
+  return state.tasks
+    .filter((task) => state.ui.childFilter === "all" || task.childIds.includes(state.ui.childFilter))
+    .filter((task) => state.ui.categoryFilter === "all" || task.categoryId === state.ui.categoryFilter)
+    .filter((task) => !query || `${task.title} ${task.notes}`.toLowerCase().includes(query))
+    .sort(sortTasks);
+}
+
+function sortTasks(a, b) {
+  const aKey = `${a.status === "done" ? "2" : "1"}-${a.dueDate || "9999-99-99"}-${a.dueTime || "99:99"}`;
+  const bKey = `${b.status === "done" ? "2" : "1"}-${b.dueDate || "9999-99-99"}-${b.dueTime || "99:99"}`;
+  return aKey.localeCompare(bKey);
+}
+
+function agendaItemsForDate(isoDate) {
+  const tasks = state.tasks
+    .filter((task) => task.dueDate === isoDate && task.status !== "done")
+    .map((task) => ({
+      id: task.id,
+      title: task.title,
+      categoryId: task.categoryId,
+      childIds: task.childIds,
+      time: task.dueTime,
+      kind: "task",
+    }));
+  const events = state.calendarEvents
+    .filter((event) => event.date === isoDate)
+    .map((event) => ({
+      id: event.id,
+      title: event.title,
+      categoryId: event.categoryId,
+      childIds: event.childIds,
+      time: event.time,
+      kind: "event",
+    }));
+  return [...tasks, ...events].sort((a, b) => (a.time || "99:99").localeCompare(b.time || "99:99"));
+}
+
+function tasksForChild(childId) {
+  return state.tasks.filter((task) => task.childIds.includes(childId));
+}
+
+function categoryById(id) {
+  return state.categories.find((category) => category.id === id);
+}
+
+function childById(id) {
+  return state.children.find((child) => child.id === id);
+}
+
+function childrenNames(ids = []) {
+  if (!ids.length) return "׳›׳ ׳”׳׳©׳₪׳—׳”";
+  return ids.map((id) => childById(id)?.name).filter(Boolean).join(", ") || "׳›׳ ׳”׳׳©׳₪׳—׳”";
+}
+
+function renderTinyAvatar(childId) {
+  const child = childById(childId);
+  if (!child) return "";
+  return `<span class="avatar" title="${escapeAttr(child.name)}" style="--avatar:${child.color}">${child.initials}</span>`;
+}
+
+function guessChildren(text = "") {
+  const lower = text.toLowerCase();
+  const ids = state.children.filter((child) => lower.includes(child.name.toLowerCase())).map((child) => child.id);
+  return ids;
+}
+
+function guessCategory(text = "") {
+  const lower = text.toLowerCase();
+  const rules = [
+    ["medical", ["׳¨׳•׳₪׳", "׳¨׳•׳₪׳׳”", "׳¨׳₪׳•׳׳”", "׳×׳•׳¨", "׳׳¨׳₪׳׳”", "׳§׳•׳₪׳”", "׳—׳™׳¡׳•׳", "׳‘׳“׳™׳§׳”"]],
+    ["school", ["׳‘׳™׳× ׳¡׳₪׳¨", "׳‘׳™׳”׳¡", "׳›׳™׳×׳”", "׳׳—׳ ׳›׳×", "׳˜׳™׳•׳", "׳׳™׳¨׳•׳¢", "׳׳¡׳™׳₪׳×", "׳’׳"]],
+    ["activities", ["׳—׳•׳’", "׳׳™׳׳•׳", "׳›׳“׳•׳¨׳’׳", "׳¨׳™׳§׳•׳“", "׳©׳—׳™׳™׳”", "׳₪׳¡׳ ׳×׳¨", "׳’׳³׳•׳“׳•", "׳’'׳•׳“׳•"]],
+    ["family", ["׳©׳‘׳×", "׳—׳’", "׳—׳’׳™׳", "׳׳©׳₪׳—׳”", "׳¡׳‘׳×׳", "׳¡׳‘׳", "׳§׳™׳“׳•׳©"]],
+  ];
+  return rules.find(([, words]) => words.some((word) => lower.includes(word)))?.[0] || "family";
+}
+
+function currentMember() {
+  if (!state.currentUserEmail) return state.members.find((member) => member.role === "owner") || null;
+  return state.members.find((member) => member.email.toLowerCase() === state.currentUserEmail.toLowerCase()) || null;
+}
+
+function canManageUsers() {
+  const member = currentMember();
+  return !state.currentUserEmail || member?.role === "owner" || member?.role === "admin";
+}
+
+function roleLabel(role) {
+  return {
+    owner: "׳׳“׳׳™׳ ׳¨׳׳©׳™",
+    admin: "׳׳“׳׳™׳",
+    user: "׳׳©׳×׳׳©",
+  }[role] || "׳׳©׳×׳׳©";
+}
+
+function viewTitle(view) {
+  return {
+    home: "׳“׳©׳‘׳•׳¨׳“ ׳׳©׳₪׳—׳×׳™",
+    calendar: "׳׳•׳— ׳©׳ ׳” ׳׳©׳₪׳—׳×׳™",
+    tasks: "׳׳©׳™׳׳•׳×",
+    kids: "׳₪׳¨׳•׳₪׳™׳׳™ ׳™׳׳“׳™׳",
+    sync: "׳¡׳ ׳›׳¨׳•׳ Gmail ׳•׳™׳•׳׳",
+    users: "׳ ׳™׳”׳•׳ ׳׳©׳×׳׳©׳™׳",
+  }[view] || "׳§׳™׳¨ ׳”׳‘׳™׳×";
+}
+
+function uid() {
+  return crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+function localISO(offset = 0) {
+  return localISOFromDate(addDays(new Date(), offset));
+}
+
+function localISOFromDate(date) {
+  const copy = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  const offset = copy.getTimezoneOffset() * 60000;
+  return new Date(copy.getTime() - offset).toISOString().slice(0, 10);
+}
+
+function addDays(date, days) {
+  const copy = new Date(date);
+  copy.setDate(copy.getDate() + days);
+  return copy;
+}
+
+function formatDate(value) {
+  if (!value) return "׳׳׳ ׳×׳׳¨׳™׳";
+  return new Intl.DateTimeFormat("he-IL", { day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date(`${value}T12:00:00`));
+}
+
+function formatLongDate(date) {
+  return new Intl.DateTimeFormat("he-IL", { weekday: "long", day: "numeric", month: "long" }).format(date);
+}
+
+function formatDateTime(value) {
+  if (!value) return "";
+  return new Intl.DateTimeFormat("he-IL", {
+    day: "2-digit",
+    month: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
+
+function weekday(date) {
+  return new Intl.DateTimeFormat("he-IL", { weekday: "short" }).format(date);
+}
+
+function initials(value = "") {
+  const words = value.replace(/@.*/, "").split(/\s+/).filter(Boolean);
+  return words
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase();
+}
+
+function renderEmpty(text) {
+  return `<div class="empty">${escapeHTML(text)}</div>`;
+}
+
+function toast(message) {
+  const region = document.querySelector("#toast-region") || document.body;
+  clearTimeout(runtime.toastTimer);
+  region.innerHTML = `<div class="toast">${escapeHTML(message)}</div>`;
+  runtime.toastTimer = window.setTimeout(() => {
+    region.innerHTML = "";
+  }, 3200);
+}
+
+function escapeHTML(value = "") {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function escapeAttr(value = "") {
+  return escapeHTML(value);
+}
+
+    </script>
+  </body>
+</html>
