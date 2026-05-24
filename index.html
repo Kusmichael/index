@@ -989,7 +989,7 @@ a {
   <body>
     <div id="app" class="app-shell"></div>
     <script>
-const STORAGE_KEY = "homewall-state-v3";
+const STORAGE_KEY = "homewall-state-v5";
 const GOOGLE_SCOPES = {
   profile: ["openid", "email", "profile"],
   calendar: ["openid", "email", "profile", "https://www.googleapis.com/auth/calendar.readonly"],
@@ -1096,6 +1096,11 @@ document.addEventListener("submit", (event) => {
     event.preventDefault();
     addMemberFromForm(event.target);
   }
+
+  if (event.target.id === "owner-form") {
+    event.preventDefault();
+    updateOwnerFromForm(event.target);
+  }
 });
 
 document.addEventListener("input", (event) => {
@@ -1118,7 +1123,7 @@ function loadState() {
 
 function normalizeState(saved) {
   const base = makeInitialState();
-  return {
+  const normalized = {
     ...base,
     ...saved,
     settings: { ...base.settings, ...(saved.settings || {}) },
@@ -1131,6 +1136,28 @@ function normalizeState(saved) {
     calendarEvents: saved.calendarEvents || [],
     mailItems: saved.mailItems || [],
   };
+
+  normalized.members = normalizeMembers(normalized.members);
+  return normalized;
+}
+
+function normalizeMembers(members) {
+  const list = Array.isArray(members) && members.length ? [...members] : makeInitialState().members;
+  let owner = list.find((member) => member.role === "owner");
+
+  if (!owner) {
+    owner = makeInitialState().members[0];
+    list.unshift(owner);
+  }
+
+  if (owner.email?.toLowerCase() === "owner@gmail.com") {
+    owner.email = "";
+    owner.name = "אדמין ראשי לא הוגדר";
+    owner.status = "צריך להגדיר";
+    owner.picture = "";
+  }
+
+  return list;
 }
 
 function makeInitialState() {
@@ -1220,12 +1247,12 @@ function makeInitialState() {
     members: [
       {
         id: uid(),
-        email: "owner@gmail.com",
-        name: "אדמין משפחה",
+        email: "",
+        name: "אדמין ראשי לא הוגדר",
         role: "owner",
-        status: "פעיל",
+        status: "צריך להגדיר",
         picture: "",
-        lastActive: new Date().toISOString(),
+        lastActive: "",
       },
     ],
     calendarEvents: [],
@@ -1662,8 +1689,31 @@ function renderKidProfile(child) {
   `;
 }
 
-function renderSyncView() {
+function getGoogleReadiness() {
+  const protocol = location.protocol;
+  const hostname = location.hostname;
+  const isLocalhost = hostname === "localhost" || hostname === "127.0.0.1";
+  const supportedOrigin = protocol === "https:" || (protocol === "http:" && isLocalhost);
+  const origin = protocol === "file:" ? "file:// לא נתמך על ידי Google OAuth" : location.origin;
+  const originNote = supportedOrigin
+    ? "הוסף את ה-Origin הזה ב-Google Cloud"
+    : "פתח דרך http://localhost:4173 או דרך GitHub Pages";
   const hasClient = Boolean(state.settings.googleClientId);
+  const gisLoaded = Boolean(window.google?.accounts?.oauth2);
+
+  return {
+    hasClient,
+    gisLoaded,
+    origin,
+    originNote,
+    supportedOrigin,
+    ready: hasClient && gisLoaded && supportedOrigin,
+  };
+}
+
+function renderSyncView() {
+  const readiness = getGoogleReadiness();
+  const connectedEmail = state.currentUserEmail || currentMember()?.email || "";
   return `
     <section class="view">
       <div class="two-col">
@@ -1680,28 +1730,34 @@ function renderSyncView() {
             </div>
             <div class="status-box">
               <b>Origin להוספה ב-Google Cloud</b>
-              <span>${escapeHTML(location.origin)}</span>
+              <span>${escapeHTML(readiness.origin)}</span>
+              <span>${escapeHTML(readiness.originNote)}</span>
             </div>
           </div>
           <div class="chip-row" style="margin-top:14px">
             <button class="primary-button" data-action="save-settings">שמירת הגדרות</button>
-            <button class="secondary-button" data-action="google-signin" ${hasClient ? "" : "disabled"}>כניסה עם Gmail</button>
+            <button class="secondary-button" data-action="google-signin">כניסה עם Gmail</button>
           </div>
         </section>
 
         <section class="panel">
           <div class="panel-header">
             <h3>מצב סנכרון</h3>
-            <span class="status-chip ${hasClient ? "" : "warn"}">${hasClient ? "מוכן" : "חסר Client ID"}</span>
+            <span class="status-chip ${readiness.ready ? "" : "warn"}">${readiness.ready ? "מוכן" : "דורש הגדרה"}</span>
           </div>
           <div class="integration-status">
-            ${renderStatusBox("זהות", currentMember()?.email || "לא מחובר", currentMember() ? roleLabel(currentMember().role) : "Gmail")}
+            ${renderStatusBox("זהות", connectedEmail || "לא מחובר", currentMember() ? roleLabel(currentMember().role) : "Gmail")}
             ${renderStatusBox("Google Calendar", state.sync.calendarStatus, state.sync.calendarLastSync ? formatDateTime(state.sync.calendarLastSync) : "טרם עודכן")}
             ${renderStatusBox("Gmail", state.sync.gmailStatus, state.sync.gmailLastSync ? formatDateTime(state.sync.gmailLastSync) : "טרם עודכן")}
           </div>
+          <div class="integration-status" style="margin-top:10px">
+            ${renderStatusBox("כתובת פתיחה", readiness.supportedOrigin ? "תקינה" : "לא מתאימה ל-Google", readiness.originNote)}
+            ${renderStatusBox("Client ID", readiness.hasClient ? "הוזן" : "חסר", readiness.hasClient ? "נשמר באפליקציה" : "צריך להדביק OAuth Client ID")}
+            ${renderStatusBox("Google Script", readiness.gisLoaded ? "נטען" : "עדיין לא נטען", readiness.gisLoaded ? "אפשר לנסות להתחבר" : "צריך אינטרנט/רענון")}
+          </div>
           <div class="chip-row" style="margin-top:14px">
-            <button class="primary-button" data-action="sync-calendar" ${hasClient ? "" : "disabled"}>↻ סנכרון יומן</button>
-            <button class="primary-button" data-action="sync-gmail" ${hasClient ? "" : "disabled"}>↻ סנכרון Gmail</button>
+            <button class="primary-button" data-action="sync-calendar">↻ סנכרון יומן</button>
+            <button class="primary-button" data-action="sync-gmail">↻ סנכרון Gmail</button>
           </div>
         </section>
       </div>
@@ -1793,6 +1849,8 @@ function renderUsersView() {
             ${state.members.map((member) => renderMemberRow(member, canManage)).join("")}
           </div>
         </section>
+        <div class="stack">
+          ${renderOwnerForm(canManage)}
         <form id="member-form" class="form-panel">
           <h3>הוספת משתמש</h3>
           <div class="form-grid one">
@@ -1814,8 +1872,29 @@ function renderUsersView() {
           </div>
           <button class="primary-button" type="submit" ${canManage ? "" : "disabled"}>+ הוספה</button>
         </form>
+        </div>
       </div>
     </section>
+  `;
+}
+
+function renderOwnerForm(canManage) {
+  const owner = ownerMember() || {};
+  return `
+    <form id="owner-form" class="form-panel">
+      <h3>אדמין ראשי</h3>
+      <div class="form-grid one">
+        <div class="field">
+          <label for="owner-name">שם</label>
+          <input id="owner-name" name="name" class="input" required value="${escapeAttr(owner.name || "")}" />
+        </div>
+        <div class="field">
+          <label for="owner-email">כתובת Gmail של האדמין הראשי</label>
+          <input id="owner-email" name="email" class="input" type="email" required placeholder="name@gmail.com" value="${escapeAttr(owner.email || "")}" />
+        </div>
+      </div>
+      <button class="primary-button" type="submit" ${canManage ? "" : "disabled"}>שמירת אדמין ראשי</button>
+    </form>
   `;
 }
 
@@ -1828,7 +1907,7 @@ function renderMemberRow(member, canManage) {
       <div>
         <b>${escapeHTML(member.name || member.email)}</b>
         <div class="meta-row">
-          <span>${escapeHTML(member.email)}</span>
+          <span>${escapeHTML(member.email || "לא הוגדר Gmail")}</span>
           <span class="role-chip ${member.role}">${roleLabel(member.role)}</span>
           <span>${escapeHTML(member.status || "פעיל")}</span>
         </div>
@@ -1895,7 +1974,7 @@ function addMemberFromForm(form) {
     return;
   }
 
-  if (state.members.some((member) => member.email.toLowerCase() === email)) {
+  if (state.members.some((member) => String(member.email || "").toLowerCase() === email)) {
     toast("המשתמש כבר קיים");
     return;
   }
@@ -1911,6 +1990,46 @@ function addMemberFromForm(form) {
   });
   saveState();
   toast("המשתמש נוסף");
+  render();
+}
+
+function updateOwnerFromForm(form) {
+  if (!canManageUsers()) {
+    toast("רק אדמין יכול לשנות אדמין ראשי");
+    return;
+  }
+
+  const formData = new FormData(form);
+  const email = String(formData.get("email") || "").trim().toLowerCase();
+  const name = String(formData.get("name") || "").trim();
+
+  if (!email.endsWith("@gmail.com")) {
+    toast("האדמין הראשי חייב להיות כתובת Gmail");
+    return;
+  }
+
+  let owner = ownerMember();
+  if (!owner) {
+    owner = {
+      id: uid(),
+      email: "",
+      name: "",
+      role: "owner",
+      status: "פעיל",
+      picture: "",
+      lastActive: "",
+    };
+    state.members.unshift(owner);
+  }
+
+  state.members = state.members.filter((member) => member.role === "owner" || String(member.email || "").toLowerCase() !== email);
+  owner.email = email;
+  owner.name = name || email.split("@")[0];
+  owner.status = "פעיל";
+  owner.lastActive = new Date().toISOString();
+  state.currentUserEmail = email;
+  saveState();
+  toast("האדמין הראשי עודכן");
   render();
 }
 
@@ -2010,13 +2129,20 @@ async function loadGmailMessage(id) {
 
 function requestGoogleToken(scopes) {
   return new Promise((resolve, reject) => {
-    if (!state.settings.googleClientId) {
-      reject(new Error("חסר Google OAuth Client ID"));
+    const readiness = getGoogleReadiness();
+
+    if (!readiness.supportedOrigin) {
+      reject(new Error("Google לא עובד מקובץ file://. פתח את האפליקציה דרך http://localhost:4173 או פרסם אותה ב-GitHub Pages."));
       return;
     }
 
-    if (!window.google?.accounts?.oauth2) {
-      reject(new Error("ספריית Google עדיין לא נטענה. נסו שוב בעוד רגע."));
+    if (!readiness.hasClient) {
+      reject(new Error("חסר Google OAuth Client ID. צריך ליצור OAuth Client ב-Google Cloud ולהדביק אותו במסך הסנכרון."));
+      return;
+    }
+
+    if (!readiness.gisLoaded) {
+      reject(new Error("ספריית Google עדיין לא נטענה. בדוק שיש אינטרנט ורענן את הדף."));
       return;
     }
 
@@ -2058,7 +2184,18 @@ async function loadGoogleProfile(accessToken) {
   }
 
   state.currentUserEmail = email;
-  const existing = state.members.find((member) => member.email.toLowerCase() === email);
+  const owner = ownerMember();
+  if (owner && !owner.email) {
+    owner.email = email;
+    owner.name = profile.name || email.split("@")[0];
+    owner.picture = profile.picture || "";
+    owner.status = "פעיל";
+    owner.lastActive = new Date().toISOString();
+    saveState();
+    return;
+  }
+
+  const existing = state.members.find((member) => String(member.email || "").toLowerCase() === email);
 
   if (existing) {
     existing.name = profile.name || existing.name;
@@ -2252,7 +2389,11 @@ function guessCategory(text = "") {
 
 function currentMember() {
   if (!state.currentUserEmail) return state.members.find((member) => member.role === "owner") || null;
-  return state.members.find((member) => member.email.toLowerCase() === state.currentUserEmail.toLowerCase()) || null;
+  return state.members.find((member) => String(member.email || "").toLowerCase() === state.currentUserEmail.toLowerCase()) || null;
+}
+
+function ownerMember() {
+  return state.members.find((member) => member.role === "owner") || null;
 }
 
 function canManageUsers() {
