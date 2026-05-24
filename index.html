@@ -2,6 +2,7 @@
 <html lang="he" dir="rtl">
   <head>
     <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f7f3e8" />
     <title>קיר הבית | ארגון משפחתי</title>
@@ -1043,7 +1044,7 @@ document.addEventListener("click", async (event) => {
     state.settings.googleClientId = clientId;
     state.settings.gmailQuery = gmailQuery;
     saveState();
-    toast("׳”׳’׳“׳¨׳•׳× Google ׳ ׳©׳׳¨׳•");
+    toast("הגדרות Google נשמרו");
     render();
   }
 
@@ -1064,7 +1065,7 @@ document.addEventListener("click", async (event) => {
     runtime.grantedScopes.clear();
     state.currentUserEmail = "";
     saveState();
-    toast("׳”׳×׳ ׳×׳§׳× ׳׳”׳—׳©׳‘׳•׳ ׳‘׳׳₪׳׳™׳§׳¦׳™׳”");
+    toast("התנתקת מהחשבון באפליקציה");
     render();
   }
 
@@ -1137,13 +1138,13 @@ function makeInitialState() {
     currentUserEmail: "",
     settings: {
       googleClientId: "",
-      gmailQuery: "newer_than:21d (׳¨׳•׳₪׳ OR ׳‘׳™׳× ׳¡׳₪׳¨ OR ׳—׳•׳’ OR ׳©׳‘׳× OR ׳—׳’)",
+      gmailQuery: "newer_than:21d (רופא OR בית ספר OR חוג OR שבת OR חג)",
     },
     sync: {
       calendarLastSync: "",
       gmailLastSync: "",
-      calendarStatus: "׳׳ ׳׳—׳•׳‘׳¨",
-      gmailStatus: "׳׳ ׳׳—׳•׳‘׳¨",
+      calendarStatus: "לא מחובר",
+      gmailStatus: "לא מחובר",
     },
     ui: {
       view: "home",
@@ -1152,77 +1153,77 @@ function makeInitialState() {
       search: "",
     },
     children: [
-      { id: "omer", name: "׳¢׳•׳׳¨", age: 9, color: "#477fd2", initials: "׳¢׳•" },
-      { id: "elia", name: "׳׳׳™׳”", age: 7, color: "#d95c83", initials: "׳׳" },
-      { id: "roni", name: "׳¨׳•׳ ׳™", age: 3, color: "#0f9f8d", initials: "׳¨׳•" },
+      { id: "omer", name: "עומר", age: 9, color: "#477fd2", initials: "עו" },
+      { id: "elia", name: "אליה", age: 7, color: "#d95c83", initials: "אל" },
+      { id: "roni", name: "רוני", age: 3, color: "#0f9f8d", initials: "רו" },
     ],
     categories: [
-      { id: "activities", name: "׳—׳•׳’׳™׳", color: "#477fd2" },
-      { id: "medical", name: "׳¨׳•׳₪׳ / ׳¨׳₪׳•׳׳”", color: "#d95c83" },
-      { id: "school", name: "׳‘׳™׳× ׳¡׳₪׳¨ / ׳׳™׳¨׳•׳¢׳™׳", color: "#e9a72f" },
-      { id: "family", name: "׳©׳‘׳× / ׳—׳’׳™׳ / ׳׳©׳₪׳—׳”", color: "#0f9f8d" },
+      { id: "activities", name: "חוגים", color: "#477fd2" },
+      { id: "medical", name: "רופא / רפואה", color: "#d95c83" },
+      { id: "school", name: "בית ספר / אירועים", color: "#e9a72f" },
+      { id: "family", name: "שבת / חגים / משפחה", color: "#0f9f8d" },
     ],
     tasks: [
       {
         id: uid(),
-        title: "׳׳”׳‘׳™׳ ׳—׳•׳׳¦׳× ׳¡׳₪׳•׳¨׳˜ ׳׳—׳•׳’ ׳›׳“׳•׳¨׳’׳",
+        title: "להביא חולצת ספורט לחוג כדורגל",
         categoryId: "activities",
         childIds: ["omer"],
         dueDate: localISO(1),
         dueTime: "16:30",
-        priority: "׳¨׳’׳™׳׳”",
+        priority: "רגילה",
         status: "open",
-        notes: "׳׳‘׳“׳•׳§ ׳©׳”׳‘׳§׳‘׳•׳§ ׳‘׳×׳™׳§.",
-        source: "׳׳©׳₪׳—׳”",
-        createdBy: "׳ ׳™׳”׳•׳ ׳׳§׳•׳׳™",
+        notes: "לבדוק שהבקבוק בתיק.",
+        source: "משפחה",
+        createdBy: "ניהול מקומי",
       },
       {
         id: uid(),
-        title: "׳׳™׳©׳•׳¨ ׳”׳•׳¨׳™׳ ׳׳˜׳™׳•׳ ׳‘׳™׳× ׳¡׳₪׳¨",
+        title: "אישור הורים לטיול בית ספר",
         categoryId: "school",
         childIds: ["elia"],
         dueDate: localISO(2),
         dueTime: "08:00",
-        priority: "׳’׳‘׳•׳”׳”",
+        priority: "גבוהה",
         status: "open",
-        notes: "׳׳”׳—׳–׳™׳¨ ׳׳׳—׳ ׳›׳× ׳‘׳‘׳•׳§׳¨.",
-        source: "׳׳©׳₪׳—׳”",
-        createdBy: "׳ ׳™׳”׳•׳ ׳׳§׳•׳׳™",
+        notes: "להחזיר למחנכת בבוקר.",
+        source: "משפחה",
+        createdBy: "ניהול מקומי",
       },
       {
         id: uid(),
-        title: "׳׳§׳‘׳•׳¢ ׳×׳•׳¨ ׳׳¨׳•׳₪׳ ׳™׳׳“׳™׳",
+        title: "לקבוע תור לרופא ילדים",
         categoryId: "medical",
         childIds: ["roni"],
         dueDate: localISO(3),
         dueTime: "11:15",
-        priority: "׳’׳‘׳•׳”׳”",
+        priority: "גבוהה",
         status: "open",
-        notes: "׳׳¢׳§׳‘ ׳׳—׳¨׳™ ׳©׳™׳¢׳•׳.",
-        source: "׳׳©׳₪׳—׳”",
-        createdBy: "׳ ׳™׳”׳•׳ ׳׳§׳•׳׳™",
+        notes: "מעקב אחרי שיעול.",
+        source: "משפחה",
+        createdBy: "ניהול מקומי",
       },
       {
         id: uid(),
-        title: "׳¨׳©׳™׳׳× ׳§׳ ׳™׳•׳× ׳׳©׳‘׳× ׳׳¦׳ ׳¡׳‘׳×׳",
+        title: "רשימת קניות לשבת אצל סבתא",
         categoryId: "family",
         childIds: ["omer", "elia", "roni"],
         dueDate: localISO(5),
         dueTime: "13:00",
-        priority: "׳¨׳’׳™׳׳”",
+        priority: "רגילה",
         status: "open",
-        notes: "׳—׳׳•׳×, ׳©׳×׳™׳™׳”, ׳‘׳’׳“׳™׳ ׳׳”׳—׳׳₪׳”.",
-        source: "׳׳©׳₪׳—׳”",
-        createdBy: "׳ ׳™׳”׳•׳ ׳׳§׳•׳׳™",
+        notes: "חלות, שתייה, בגדים להחלפה.",
+        source: "משפחה",
+        createdBy: "ניהול מקומי",
       },
     ],
     members: [
       {
         id: uid(),
         email: "owner@gmail.com",
-        name: "׳׳“׳׳™׳ ׳׳©׳₪׳—׳”",
+        name: "אדמין משפחה",
         role: "owner",
-        status: "׳₪׳¢׳™׳",
+        status: "פעיל",
         picture: "",
         lastActive: new Date().toISOString(),
       },
@@ -1254,25 +1255,25 @@ function renderSidebar() {
   const mailCount = state.mailItems.length;
   const eventCount = state.calendarEvents.length;
   const nav = [
-    { id: "home", icon: "ג‚", label: "׳‘׳™׳×", count: taskCount },
-    { id: "calendar", icon: "ג–¡", label: "׳׳•׳— ׳©׳ ׳”", count: eventCount },
-    { id: "tasks", icon: "ג“", label: "׳׳©׳™׳׳•׳×", count: taskCount },
-    { id: "kids", icon: "ג—", label: "׳™׳׳“׳™׳", count: state.children.length },
-    { id: "sync", icon: "ג†»", label: "׳¡׳ ׳›׳¨׳•׳", count: mailCount + eventCount },
-    { id: "users", icon: "ג™™", label: "׳׳©׳×׳׳©׳™׳", count: state.members.length },
+    { id: "home", icon: "⌂", label: "בית", count: taskCount },
+    { id: "calendar", icon: "□", label: "לוח שנה", count: eventCount },
+    { id: "tasks", icon: "✓", label: "משימות", count: taskCount },
+    { id: "kids", icon: "●", label: "ילדים", count: state.children.length },
+    { id: "sync", icon: "↻", label: "סנכרון", count: mailCount + eventCount },
+    { id: "users", icon: "♙", label: "משתמשים", count: state.members.length },
   ];
 
   return `
     <aside class="sidebar">
-      <section class="brand" aria-label="׳©׳ ׳”׳׳₪׳׳™׳§׳¦׳™׳”">
+      <section class="brand" aria-label="שם האפליקציה">
         <div>
-          <h1>׳§׳™׳¨ ׳”׳‘׳™׳×</h1>
-          <p>׳׳©׳™׳׳•׳×, ׳™׳•׳׳ ׳•׳׳™׳™׳׳™׳ ׳‘׳׳§׳•׳ ׳׳—׳“</p>
+          <h1>קיר הבית</h1>
+          <p>משימות, יומן ומיילים במקום אחד</p>
         </div>
         <div class="brand-mark">KH</div>
       </section>
 
-      <nav class="nav" aria-label="׳ ׳™׳•׳•׳˜ ׳¨׳׳©׳™">
+      <nav class="nav" aria-label="ניווט ראשי">
         ${nav
           .map(
             (item) => `
@@ -1286,7 +1287,7 @@ function renderSidebar() {
           .join("")}
       </nav>
 
-      <section class="family-strip" aria-label="׳₪׳¨׳•׳₪׳™׳׳™ ׳™׳׳“׳™׳">
+      <section class="family-strip" aria-label="פרופילי ילדים">
         ${state.children.map((child) => renderMiniProfile(child)).join("")}
       </section>
     </aside>
@@ -1300,7 +1301,7 @@ function renderMiniProfile(child) {
       <span class="avatar" style="--avatar:${child.color}">${child.initials}</span>
       <span>
         <b>${escapeHTML(child.name)}</b>
-        <span>׳’׳™׳ ${child.age}</span>
+        <span>גיל ${child.age}</span>
       </span>
       <span class="pill-count">${openTasks}</span>
     </button>
@@ -1327,10 +1328,10 @@ function renderTopbar() {
                 <b>${escapeHTML(current.name || current.email)}</b>
                 <span class="quiet">${roleLabel(current.role)}</span>
               </span>
-              <button class="icon-button" title="׳”׳×׳ ׳×׳§׳•׳×" data-action="logout">ג†×</button>
+              <button class="icon-button" title="התנתקות" data-action="logout">↪</button>
             `
             : `
-              <button class="secondary-button" data-view="sync">׳›׳ ׳™׳¡׳” ׳¢׳ Gmail</button>
+              <button class="secondary-button" data-view="sync">כניסה עם Gmail</button>
             `
         }
       </div>
@@ -1357,24 +1358,24 @@ function renderHomeView() {
       <div class="hero-panel">
         <section class="hero-copy">
           <span class="status-chip ${state.settings.googleClientId ? "" : "warn"}">
-            ${state.settings.googleClientId ? "Google ׳׳•׳›׳ ׳׳—׳™׳‘׳•׳¨" : "׳ ׳“׳¨׳© Client ID"}
+            ${state.settings.googleClientId ? "Google מוכן לחיבור" : "נדרש Client ID"}
           </span>
-          <h2>׳”׳׳©׳₪׳—׳” ׳©׳׳, ׳׳¡׳•׳“׳¨׳× ׳׳₪׳™ ׳™׳׳“׳™׳.</h2>
-          <p>׳¢׳•׳׳¨, ׳׳׳™׳” ׳•׳¨׳•׳ ׳™ ׳׳§׳‘׳׳™׳ ׳₪׳¨׳•׳₪׳™׳ ׳‘׳¨׳•׳¨, ׳׳©׳™׳׳•׳× ׳׳©׳•׳™׳›׳•׳× ׳•׳™׳•׳׳ ׳׳©׳₪׳—׳×׳™ ׳©׳׳•׳›׳ ׳׳”׳¡׳×׳ ׳›׳¨׳ ׳¢׳ Gmail ׳•-Google Calendar.</p>
+          <h2>המשפחה שלך, מסודרת לפי ילדים.</h2>
+          <p>עומר, אליה ורוני מקבלים פרופיל ברור, משימות משויכות ויומן משפחתי שמוכן להסתנכרן עם Gmail ו-Google Calendar.</p>
           <div class="metric-grid">
-            ${renderMetric(openTasks.length, "׳׳©׳™׳׳•׳× ׳₪׳×׳•׳—׳•׳×")}
-            ${renderMetric(todayItems.length, "׳׳”׳™׳•׳")}
-            ${renderMetric(nextMedical, "׳¨׳₪׳•׳׳”")}
-            ${renderMetric(synced, "׳₪׳¨׳™׳˜׳™׳ ׳׳¡׳•׳ ׳›׳¨׳ ׳™׳")}
+            ${renderMetric(openTasks.length, "משימות פתוחות")}
+            ${renderMetric(todayItems.length, "להיום")}
+            ${renderMetric(nextMedical, "רפואה")}
+            ${renderMetric(synced, "פריטים מסונכרנים")}
           </div>
         </section>
         <section class="panel">
           <div class="panel-header">
-            <h3>׳”׳™׳•׳</h3>
-            <button class="primary-button" data-action="open-task-form">+ ׳׳©׳™׳׳”</button>
+            <h3>היום</h3>
+            <button class="primary-button" data-action="open-task-form">+ משימה</button>
           </div>
           <div class="stack">
-            ${todayItems.length ? todayItems.map(renderAgendaItem).join("") : renderEmpty("׳׳™׳ ׳׳©׳™׳׳•׳× ׳׳• ׳׳™׳¨׳•׳¢׳™׳ ׳׳”׳™׳•׳")}
+            ${todayItems.length ? todayItems.map(renderAgendaItem).join("") : renderEmpty("אין משימות או אירועים להיום")}
           </div>
         </section>
       </div>
@@ -1382,8 +1383,8 @@ function renderHomeView() {
       <div class="two-col">
         <section class="panel">
           <div class="panel-header">
-            <h3>׳׳₪׳™ ׳™׳׳“</h3>
-            <button class="secondary-button" data-view="kids">׳›׳ ׳”׳₪׳¨׳•׳₪׳™׳׳™׳</button>
+            <h3>לפי ילד</h3>
+            <button class="secondary-button" data-view="kids">כל הפרופילים</button>
           </div>
           <div class="three-col">
             ${state.children.map((child) => renderKidSummary(child)).join("")}
@@ -1392,11 +1393,11 @@ function renderHomeView() {
 
         <section class="panel">
           <div class="panel-header">
-            <h3>׳׳™׳™׳׳™׳ ׳׳—׳¨׳•׳ ׳™׳</h3>
-            <button class="secondary-button" data-view="sync">׳¡׳ ׳›׳¨׳•׳</button>
+            <h3>מיילים אחרונים</h3>
+            <button class="secondary-button" data-view="sync">סנכרון</button>
           </div>
           <div class="mail-list">
-            ${state.mailItems.slice(0, 4).map(renderMailItem).join("") || renderEmpty("׳¢׳“׳™׳™׳ ׳׳™׳ ׳׳™׳™׳׳™׳ ׳׳¡׳•׳ ׳›׳¨׳ ׳™׳")}
+            ${state.mailItems.slice(0, 4).map(renderMailItem).join("") || renderEmpty("עדיין אין מיילים מסונכרנים")}
           </div>
         </section>
       </div>
@@ -1425,13 +1426,13 @@ function renderKidSummary(child) {
           <span class="avatar large" style="--avatar:${child.color}">${child.initials}</span>
           <span>
             <b>${escapeHTML(child.name)}</b>
-            <span class="quiet">׳’׳™׳ ${child.age}</span>
+            <span class="quiet">גיל ${child.age}</span>
           </span>
         </div>
         <span class="pill-count">${open}</span>
       </div>
       <div class="progress" style="--avatar:${child.color}"><span style="width:${percent}%"></span></div>
-      <button class="secondary-button" data-view="tasks" data-child-filter="${child.id}">׳׳©׳™׳׳•׳× ׳©׳ ${escapeHTML(child.name)}</button>
+      <button class="secondary-button" data-view="tasks" data-child-filter="${child.id}">משימות של ${escapeHTML(child.name)}</button>
     </article>
   `;
 }
@@ -1441,9 +1442,9 @@ function renderCalendarView() {
   return `
     <section class="view">
       <div class="toolbar">
-        <button class="primary-button" data-action="sync-calendar">ג†» ׳¡׳ ׳›׳¨׳•׳ ׳™׳•׳׳</button>
-        <button class="secondary-button" data-view="sync">׳”׳’׳“׳¨׳•׳× Google</button>
-        <span class="quiet">${state.sync.calendarLastSync ? `׳¢׳•׳“׳›׳ ${formatDateTime(state.sync.calendarLastSync)}` : "׳˜׳¨׳ ׳‘׳•׳¦׳¢ ׳¡׳ ׳›׳¨׳•׳"}</span>
+        <button class="primary-button" data-action="sync-calendar">↻ סנכרון יומן</button>
+        <button class="secondary-button" data-view="sync">הגדרות Google</button>
+        <span class="quiet">${state.sync.calendarLastSync ? `עודכן ${formatDateTime(state.sync.calendarLastSync)}` : "טרם בוצע סנכרון"}</span>
       </div>
       <div class="calendar-grid">
         ${days.map(renderCalendarDay).join("")}
@@ -1462,7 +1463,7 @@ function renderCalendarDay(date) {
         <span class="date-badge">${date.getDate()}</span>
       </div>
       <div class="stack">
-        ${items.length ? items.map(renderAgendaItem).join("") : `<span class="quiet">׳₪׳ ׳•׳™</span>`}
+        ${items.length ? items.map(renderAgendaItem).join("") : `<span class="quiet">פנוי</span>`}
       </div>
     </section>
   `;
@@ -1475,7 +1476,7 @@ function renderAgendaItem(item) {
       <span class="agenda-dot" style="--cat:${category?.color || "#0f9f8d"}"></span>
       <span>
         <b>${escapeHTML(item.title)}</b>
-        <span class="quiet">${item.time || "׳›׳ ׳”׳™׳•׳"} ֲ· ${childrenNames(item.childIds)}</span>
+        <span class="quiet">${item.time || "כל היום"} · ${childrenNames(item.childIds)}</span>
       </span>
     </div>
   `;
@@ -1488,8 +1489,8 @@ function renderTasksView() {
       <div class="two-col">
         <section class="panel">
           <div class="panel-header">
-            <h3>׳׳©׳™׳׳•׳×</h3>
-            <span class="quiet">${filteredTasks().length} ׳₪׳¨׳™׳˜׳™׳</span>
+            <h3>משימות</h3>
+            <span class="quiet">${filteredTasks().length} פריטים</span>
           </div>
           <div id="task-list-region">
             ${renderTaskList()}
@@ -1504,8 +1505,8 @@ function renderTasksView() {
 function renderTaskToolbar() {
   return `
     <div class="toolbar">
-      <div class="segmented" aria-label="׳¡׳™׳ ׳•׳ ׳׳₪׳™ ׳™׳׳“">
-        <button class="chip ${state.ui.childFilter === "all" ? "active" : ""}" data-child-filter="all">׳›׳ ׳”׳™׳׳“׳™׳</button>
+      <div class="segmented" aria-label="סינון לפי ילד">
+        <button class="chip ${state.ui.childFilter === "all" ? "active" : ""}" data-child-filter="all">כל הילדים</button>
         ${state.children
           .map(
             (child) => `
@@ -1516,8 +1517,8 @@ function renderTaskToolbar() {
           )
           .join("")}
       </div>
-      <div class="segmented" aria-label="׳¡׳™׳ ׳•׳ ׳׳₪׳™ ׳§׳˜׳’׳•׳¨׳™׳”">
-        <button class="chip ${state.ui.categoryFilter === "all" ? "active" : ""}" data-category-filter="all">׳›׳ ׳”׳§׳˜׳’׳•׳¨׳™׳•׳×</button>
+      <div class="segmented" aria-label="סינון לפי קטגוריה">
+        <button class="chip ${state.ui.categoryFilter === "all" ? "active" : ""}" data-category-filter="all">כל הקטגוריות</button>
         ${state.categories
           .map(
             (category) => `
@@ -1528,7 +1529,7 @@ function renderTaskToolbar() {
           )
           .join("")}
       </div>
-      <input id="task-search" class="input" value="${escapeAttr(state.ui.search)}" placeholder="׳—׳™׳₪׳•׳© ׳׳©׳™׳׳”" aria-label="׳—׳™׳₪׳•׳© ׳׳©׳™׳׳”" />
+      <input id="task-search" class="input" value="${escapeAttr(state.ui.search)}" placeholder="חיפוש משימה" aria-label="חיפוש משימה" />
     </div>
   `;
 }
@@ -1540,7 +1541,7 @@ function renderTaskListOnly() {
 
 function renderTaskList() {
   const tasks = filteredTasks();
-  if (!tasks.length) return renderEmpty("׳׳™׳ ׳׳©׳™׳׳•׳× ׳©׳׳×׳׳™׳׳•׳× ׳׳¡׳™׳ ׳•׳");
+  if (!tasks.length) return renderEmpty("אין משימות שמתאימות לסינון");
   return `<div class="task-list">${tasks.map(renderTaskItem).join("")}</div>`;
 }
 
@@ -1548,25 +1549,25 @@ function renderTaskItem(task) {
   const category = categoryById(task.categoryId);
   return `
     <article class="task-item ${task.status === "done" ? "done" : ""}">
-      <button class="task-toggle" title="${task.status === "done" ? "׳¡׳׳ ׳›׳₪׳×׳•׳—׳”" : "׳¡׳׳ ׳›׳”׳•׳©׳׳׳”"}" data-action="toggle-task" data-id="${task.id}">
-        ${task.status === "done" ? "ג“" : ""}
+      <button class="task-toggle" title="${task.status === "done" ? "סמן כפתוחה" : "סמן כהושלמה"}" data-action="toggle-task" data-id="${task.id}">
+        ${task.status === "done" ? "✓" : ""}
       </button>
       <div>
         <div class="task-title">
           <b>${escapeHTML(task.title)}</b>
-          <span class="category-chip" style="--cat:${category?.color || "#0f9f8d"}">${escapeHTML(category?.name || "׳›׳׳׳™")}</span>
-          ${task.source && task.source !== "׳׳©׳₪׳—׳”" ? `<span class="source-chip">${escapeHTML(task.source)}</span>` : ""}
+          <span class="category-chip" style="--cat:${category?.color || "#0f9f8d"}">${escapeHTML(category?.name || "כללי")}</span>
+          ${task.source && task.source !== "משפחה" ? `<span class="source-chip">${escapeHTML(task.source)}</span>` : ""}
         </div>
         <div class="meta-row">
-          <span>${formatDate(task.dueDate)}${task.dueTime ? ` ֲ· ${task.dueTime}` : ""}</span>
+          <span>${formatDate(task.dueDate)}${task.dueTime ? ` · ${task.dueTime}` : ""}</span>
           <span>${childrenNames(task.childIds)}</span>
-          <span>׳¢׳“׳™׳₪׳•׳× ${escapeHTML(task.priority || "׳¨׳’׳™׳׳”")}</span>
+          <span>עדיפות ${escapeHTML(task.priority || "רגילה")}</span>
         </div>
         ${task.notes ? `<p class="quiet">${escapeHTML(task.notes)}</p>` : ""}
       </div>
       <div class="row-actions">
         <span class="mini-avatars">${task.childIds.map((id) => renderTinyAvatar(id)).join("")}</span>
-        <button class="icon-button" title="׳׳—׳™׳§׳”" data-action="delete-task" data-id="${task.id}">ֳ—</button>
+        <button class="icon-button" title="מחיקה" data-action="delete-task" data-id="${task.id}">×</button>
       </div>
     </article>
   `;
@@ -1575,36 +1576,36 @@ function renderTaskItem(task) {
 function renderTaskForm() {
   return `
     <form id="task-form" class="form-panel">
-      <h3>׳׳©׳™׳׳” ׳—׳“׳©׳”</h3>
+      <h3>משימה חדשה</h3>
       <div class="form-grid">
         <div class="field full">
-          <label for="task-title">׳›׳•׳×׳¨׳×</label>
-          <input id="task-title" name="title" class="input" required placeholder="׳׳׳©׳ ׳×׳•׳¨ ׳׳¨׳•׳₪׳, ׳—׳•׳’, ׳׳™׳¨׳•׳¢ ׳‘׳™׳× ׳¡׳₪׳¨" />
+          <label for="task-title">כותרת</label>
+          <input id="task-title" name="title" class="input" required placeholder="למשל תור לרופא, חוג, אירוע בית ספר" />
         </div>
         <div class="field">
-          <label for="task-category">׳§׳˜׳’׳•׳¨׳™׳”</label>
+          <label for="task-category">קטגוריה</label>
           <select id="task-category" name="categoryId" class="select">
             ${state.categories.map((category) => `<option value="${category.id}">${escapeHTML(category.name)}</option>`).join("")}
           </select>
         </div>
         <div class="field">
-          <label for="task-priority">׳¢׳“׳™׳₪׳•׳×</label>
+          <label for="task-priority">עדיפות</label>
           <select id="task-priority" name="priority" class="select">
-            <option>׳¨׳’׳™׳׳”</option>
-            <option>׳’׳‘׳•׳”׳”</option>
-            <option>׳ ׳׳•׳›׳”</option>
+            <option>רגילה</option>
+            <option>גבוהה</option>
+            <option>נמוכה</option>
           </select>
         </div>
         <div class="field">
-          <label for="task-date">׳×׳׳¨׳™׳</label>
+          <label for="task-date">תאריך</label>
           <input id="task-date" name="dueDate" class="input" type="date" value="${localISO(0)}" />
         </div>
         <div class="field">
-          <label for="task-time">׳©׳¢׳”</label>
+          <label for="task-time">שעה</label>
           <input id="task-time" name="dueTime" class="input" type="time" />
         </div>
         <div class="field full">
-          <span class="choice-label">׳™׳׳“׳™׳</span>
+          <span class="choice-label">ילדים</span>
           <div class="checks">
             ${state.children
               .map(
@@ -1620,11 +1621,11 @@ function renderTaskForm() {
           </div>
         </div>
         <div class="field full">
-          <label for="task-notes">׳”׳¢׳¨׳•׳×</label>
+          <label for="task-notes">הערות</label>
           <textarea id="task-notes" name="notes" class="textarea"></textarea>
         </div>
       </div>
-      <button class="primary-button" type="submit">+ ׳”׳•׳¡׳₪׳× ׳׳©׳™׳׳”</button>
+      <button class="primary-button" type="submit">+ הוספת משימה</button>
     </form>
   `;
 }
@@ -1649,13 +1650,13 @@ function renderKidProfile(child) {
           <span class="avatar large" style="--avatar:${child.color}">${child.initials}</span>
           <span>
             <b>${escapeHTML(child.name)}</b>
-            <span class="quiet">׳’׳™׳ ${child.age} ֲ· ${open.length} ׳₪׳×׳•׳—׳•׳×</span>
+            <span class="quiet">גיל ${child.age} · ${open.length} פתוחות</span>
           </span>
         </div>
-        <button class="icon-button" title="׳”׳¦׳’׳× ׳׳©׳™׳׳•׳×" data-view="tasks" data-child-filter="${child.id}">ג†’</button>
+        <button class="icon-button" title="הצגת משימות" data-view="tasks" data-child-filter="${child.id}">→</button>
       </div>
       <div class="task-list">
-        ${tasks.slice(0, 5).map(renderTaskItem).join("") || renderEmpty(`׳׳™׳ ׳׳©׳™׳׳•׳× ׳¢׳‘׳•׳¨ ${child.name}`)}
+        ${tasks.slice(0, 5).map(renderTaskItem).join("") || renderEmpty(`אין משימות עבור ${child.name}`)}
       </div>
     </article>
   `;
@@ -1667,40 +1668,40 @@ function renderSyncView() {
     <section class="view">
       <div class="two-col">
         <section class="form-panel">
-          <h3>׳—׳™׳‘׳•׳¨ Google</h3>
+          <h3>חיבור Google</h3>
           <div class="form-grid one">
             <div class="field">
               <label for="google-client-id">Google OAuth Client ID</label>
               <input id="google-client-id" class="input" value="${escapeAttr(state.settings.googleClientId)}" placeholder="1234567890-xxxx.apps.googleusercontent.com" />
             </div>
             <div class="field">
-              <label for="gmail-query">׳—׳™׳₪׳•׳© Gmail ׳׳¡׳ ׳›׳¨׳•׳</label>
+              <label for="gmail-query">חיפוש Gmail לסנכרון</label>
               <input id="gmail-query" class="input" value="${escapeAttr(state.settings.gmailQuery)}" />
             </div>
             <div class="status-box">
-              <b>Origin ׳׳”׳•׳¡׳₪׳” ׳‘-Google Cloud</b>
+              <b>Origin להוספה ב-Google Cloud</b>
               <span>${escapeHTML(location.origin)}</span>
             </div>
           </div>
           <div class="chip-row" style="margin-top:14px">
-            <button class="primary-button" data-action="save-settings">׳©׳׳™׳¨׳× ׳”׳’׳“׳¨׳•׳×</button>
-            <button class="secondary-button" data-action="google-signin" ${hasClient ? "" : "disabled"}>׳›׳ ׳™׳¡׳” ׳¢׳ Gmail</button>
+            <button class="primary-button" data-action="save-settings">שמירת הגדרות</button>
+            <button class="secondary-button" data-action="google-signin" ${hasClient ? "" : "disabled"}>כניסה עם Gmail</button>
           </div>
         </section>
 
         <section class="panel">
           <div class="panel-header">
-            <h3>׳׳¦׳‘ ׳¡׳ ׳›׳¨׳•׳</h3>
-            <span class="status-chip ${hasClient ? "" : "warn"}">${hasClient ? "׳׳•׳›׳" : "׳—׳¡׳¨ Client ID"}</span>
+            <h3>מצב סנכרון</h3>
+            <span class="status-chip ${hasClient ? "" : "warn"}">${hasClient ? "מוכן" : "חסר Client ID"}</span>
           </div>
           <div class="integration-status">
-            ${renderStatusBox("׳–׳”׳•׳×", currentMember()?.email || "׳׳ ׳׳—׳•׳‘׳¨", currentMember() ? roleLabel(currentMember().role) : "Gmail")}
-            ${renderStatusBox("Google Calendar", state.sync.calendarStatus, state.sync.calendarLastSync ? formatDateTime(state.sync.calendarLastSync) : "׳˜׳¨׳ ׳¢׳•׳“׳›׳")}
-            ${renderStatusBox("Gmail", state.sync.gmailStatus, state.sync.gmailLastSync ? formatDateTime(state.sync.gmailLastSync) : "׳˜׳¨׳ ׳¢׳•׳“׳›׳")}
+            ${renderStatusBox("זהות", currentMember()?.email || "לא מחובר", currentMember() ? roleLabel(currentMember().role) : "Gmail")}
+            ${renderStatusBox("Google Calendar", state.sync.calendarStatus, state.sync.calendarLastSync ? formatDateTime(state.sync.calendarLastSync) : "טרם עודכן")}
+            ${renderStatusBox("Gmail", state.sync.gmailStatus, state.sync.gmailLastSync ? formatDateTime(state.sync.gmailLastSync) : "טרם עודכן")}
           </div>
           <div class="chip-row" style="margin-top:14px">
-            <button class="primary-button" data-action="sync-calendar" ${hasClient ? "" : "disabled"}>ג†» ׳¡׳ ׳›׳¨׳•׳ ׳™׳•׳׳</button>
-            <button class="primary-button" data-action="sync-gmail" ${hasClient ? "" : "disabled"}>ג†» ׳¡׳ ׳›׳¨׳•׳ Gmail</button>
+            <button class="primary-button" data-action="sync-calendar" ${hasClient ? "" : "disabled"}>↻ סנכרון יומן</button>
+            <button class="primary-button" data-action="sync-gmail" ${hasClient ? "" : "disabled"}>↻ סנכרון Gmail</button>
           </div>
         </section>
       </div>
@@ -1708,20 +1709,20 @@ function renderSyncView() {
       <div class="two-col">
         <section class="panel">
           <div class="panel-header">
-            <h3>׳׳™׳¨׳•׳¢׳™׳ ׳׳™׳•׳‘׳׳™׳</h3>
-            <span class="quiet">${state.calendarEvents.length} ׳₪׳¨׳™׳˜׳™׳</span>
+            <h3>אירועים מיובאים</h3>
+            <span class="quiet">${state.calendarEvents.length} פריטים</span>
           </div>
           <div class="event-list">
-            ${state.calendarEvents.map(renderCalendarEvent).join("") || renderEmpty("׳׳™׳ ׳׳™׳¨׳•׳¢׳™׳ ׳׳™׳•׳‘׳׳™׳")}
+            ${state.calendarEvents.map(renderCalendarEvent).join("") || renderEmpty("אין אירועים מיובאים")}
           </div>
         </section>
         <section class="panel">
           <div class="panel-header">
-            <h3>׳׳™׳™׳׳™׳ ׳׳™׳•׳‘׳׳™׳</h3>
-            <span class="quiet">${state.mailItems.length} ׳₪׳¨׳™׳˜׳™׳</span>
+            <h3>מיילים מיובאים</h3>
+            <span class="quiet">${state.mailItems.length} פריטים</span>
           </div>
           <div class="mail-list">
-            ${state.mailItems.map(renderMailItem).join("") || renderEmpty("׳׳™׳ ׳׳™׳™׳׳™׳ ׳׳™׳•׳‘׳׳™׳")}
+            ${state.mailItems.map(renderMailItem).join("") || renderEmpty("אין מיילים מיובאים")}
           </div>
         </section>
       </div>
@@ -1746,12 +1747,12 @@ function renderCalendarEvent(event) {
       <div>
         <b>${escapeHTML(event.title)}</b>
         <div class="meta-row">
-          <span>${formatDate(event.date)}${event.time ? ` ֲ· ${event.time}` : ""}</span>
-          <span class="category-chip" style="--cat:${category?.color || "#0f9f8d"}">${escapeHTML(category?.name || "׳›׳׳׳™")}</span>
+          <span>${formatDate(event.date)}${event.time ? ` · ${event.time}` : ""}</span>
+          <span class="category-chip" style="--cat:${category?.color || "#0f9f8d"}">${escapeHTML(category?.name || "כללי")}</span>
           <span>${childrenNames(event.childIds)}</span>
         </div>
       </div>
-      <button class="secondary-button" data-action="import-event" data-id="${event.id}">׳׳”׳₪׳•׳ ׳׳׳©׳™׳׳”</button>
+      <button class="secondary-button" data-action="import-event" data-id="${event.id}">להפוך למשימה</button>
     </article>
   `;
 }
@@ -1761,7 +1762,7 @@ function renderMailItem(mail) {
   return `
     <article class="mail-item">
       <div>
-        <b>${escapeHTML(mail.subject || "(׳׳׳ ׳ ׳•׳©׳)")}</b>
+        <b>${escapeHTML(mail.subject || "(ללא נושא)")}</b>
         <div class="meta-row">
           <span>${escapeHTML(mail.from || "Gmail")}</span>
           <span>${mail.date ? formatDateTime(mail.date) : ""}</span>
@@ -1771,8 +1772,8 @@ function renderMailItem(mail) {
         ${mail.snippet ? `<p class="quiet">${escapeHTML(mail.snippet)}</p>` : ""}
       </div>
       <div class="row-actions">
-        ${mail.webLink ? `<a class="secondary-button" href="${mail.webLink}" target="_blank" rel="noreferrer">׳₪׳×׳™׳—׳”</a>` : ""}
-        <button class="secondary-button" data-action="mail-to-task" data-id="${mail.id}">׳׳׳©׳™׳׳”</button>
+        ${mail.webLink ? `<a class="secondary-button" href="${mail.webLink}" target="_blank" rel="noreferrer">פתיחה</a>` : ""}
+        <button class="secondary-button" data-action="mail-to-task" data-id="${mail.id}">למשימה</button>
       </div>
     </article>
   `;
@@ -1785,33 +1786,33 @@ function renderUsersView() {
       <div class="two-col">
         <section class="panel">
           <div class="panel-header">
-            <h3>׳׳©׳×׳׳©׳™׳ ׳•׳”׳¨׳©׳׳•׳×</h3>
-            <span class="quiet">${state.members.length} ׳׳©׳×׳׳©׳™׳</span>
+            <h3>משתמשים והרשאות</h3>
+            <span class="quiet">${state.members.length} משתמשים</span>
           </div>
           <div class="member-list">
             ${state.members.map((member) => renderMemberRow(member, canManage)).join("")}
           </div>
         </section>
         <form id="member-form" class="form-panel">
-          <h3>׳”׳•׳¡׳₪׳× ׳׳©׳×׳׳©</h3>
+          <h3>הוספת משתמש</h3>
           <div class="form-grid one">
             <div class="field">
-              <label for="member-name">׳©׳</label>
+              <label for="member-name">שם</label>
               <input id="member-name" name="name" class="input" required />
             </div>
             <div class="field">
-              <label for="member-email">׳›׳×׳•׳‘׳× Gmail</label>
+              <label for="member-email">כתובת Gmail</label>
               <input id="member-email" name="email" class="input" type="email" required placeholder="name@gmail.com" />
             </div>
             <div class="field">
-              <label for="member-role">׳×׳₪׳§׳™׳“</label>
+              <label for="member-role">תפקיד</label>
               <select id="member-role" name="role" class="select">
-                <option value="admin">׳׳“׳׳™׳</option>
-                <option value="user">׳׳©׳×׳׳©</option>
+                <option value="admin">אדמין</option>
+                <option value="user">משתמש</option>
               </select>
             </div>
           </div>
-          <button class="primary-button" type="submit" ${canManage ? "" : "disabled"}>+ ׳”׳•׳¡׳₪׳”</button>
+          <button class="primary-button" type="submit" ${canManage ? "" : "disabled"}>+ הוספה</button>
         </form>
       </div>
     </section>
@@ -1829,13 +1830,13 @@ function renderMemberRow(member, canManage) {
         <div class="meta-row">
           <span>${escapeHTML(member.email)}</span>
           <span class="role-chip ${member.role}">${roleLabel(member.role)}</span>
-          <span>${escapeHTML(member.status || "׳₪׳¢׳™׳")}</span>
+          <span>${escapeHTML(member.status || "פעיל")}</span>
         </div>
       </div>
       <div class="member-actions">
-        <button class="secondary-button" data-action="set-role" data-id="${member.id}" data-role="admin" ${canManage && member.role !== "owner" ? "" : "disabled"}>׳׳“׳׳™׳</button>
-        <button class="secondary-button" data-action="set-role" data-id="${member.id}" data-role="user" ${canManage && member.role !== "owner" ? "" : "disabled"}>׳׳©׳×׳׳©</button>
-        <button class="danger-button" data-action="remove-member" data-id="${member.id}" ${canManage && member.role !== "owner" ? "" : "disabled"}>׳׳—׳™׳§׳”</button>
+        <button class="secondary-button" data-action="set-role" data-id="${member.id}" data-role="admin" ${canManage && member.role !== "owner" ? "" : "disabled"}>אדמין</button>
+        <button class="secondary-button" data-action="set-role" data-id="${member.id}" data-role="user" ${canManage && member.role !== "owner" ? "" : "disabled"}>משתמש</button>
+        <button class="danger-button" data-action="remove-member" data-id="${member.id}" ${canManage && member.role !== "owner" ? "" : "disabled"}>מחיקה</button>
       </div>
     </article>
   `;
@@ -1851,15 +1852,15 @@ function addTaskFromForm(form) {
     childIds: childIds.length ? childIds : state.children.map((child) => child.id),
     dueDate: formData.get("dueDate") || localISO(0),
     dueTime: formData.get("dueTime") || "",
-    priority: formData.get("priority") || "׳¨׳’׳™׳׳”",
+    priority: formData.get("priority") || "רגילה",
     status: "open",
     notes: formData.get("notes").trim(),
-    source: "׳׳©׳₪׳—׳”",
-    createdBy: currentMember()?.email || "׳ ׳™׳”׳•׳ ׳׳§׳•׳׳™",
+    source: "משפחה",
+    createdBy: currentMember()?.email || "ניהול מקומי",
   };
   state.tasks.unshift(task);
   saveState();
-  toast("׳”׳׳©׳™׳׳” ׳ ׳•׳¡׳₪׳”");
+  toast("המשימה נוספה");
   render();
 }
 
@@ -1874,13 +1875,13 @@ function toggleTask(id) {
 function deleteTask(id) {
   state.tasks = state.tasks.filter((task) => task.id !== id);
   saveState();
-  toast("׳”׳׳©׳™׳׳” ׳ ׳׳—׳§׳”");
+  toast("המשימה נמחקה");
   render();
 }
 
 function addMemberFromForm(form) {
   if (!canManageUsers()) {
-    toast("׳¨׳§ ׳׳“׳׳™׳ ׳™׳›׳•׳ ׳׳”׳•׳¡׳™׳£ ׳׳©׳×׳׳©׳™׳");
+    toast("רק אדמין יכול להוסיף משתמשים");
     return;
   }
 
@@ -1890,12 +1891,12 @@ function addMemberFromForm(form) {
   const role = formData.get("role") || "user";
 
   if (!email.endsWith("@gmail.com")) {
-    toast("׳™׳© ׳׳”׳–׳™׳ ׳›׳×׳•׳‘׳× Gmail");
+    toast("יש להזין כתובת Gmail");
     return;
   }
 
   if (state.members.some((member) => member.email.toLowerCase() === email)) {
-    toast("׳”׳׳©׳×׳׳© ׳›׳‘׳¨ ׳§׳™׳™׳");
+    toast("המשתמש כבר קיים");
     return;
   }
 
@@ -1904,17 +1905,17 @@ function addMemberFromForm(form) {
     email,
     name,
     role,
-    status: "׳₪׳¢׳™׳",
+    status: "פעיל",
     picture: "",
     lastActive: "",
   });
   saveState();
-  toast("׳”׳׳©׳×׳׳© ׳ ׳•׳¡׳£");
+  toast("המשתמש נוסף");
   render();
 }
 
 function setMemberRole(id, role) {
-  if (!canManageUsers()) return toast("׳¨׳§ ׳׳“׳׳™׳ ׳™׳›׳•׳ ׳׳©׳ ׳•׳× ׳”׳¨׳©׳׳•׳×");
+  if (!canManageUsers()) return toast("רק אדמין יכול לשנות הרשאות");
   const member = state.members.find((item) => item.id === id);
   if (!member || member.role === "owner") return;
   member.role = role;
@@ -1923,7 +1924,7 @@ function setMemberRole(id, role) {
 }
 
 function removeMember(id) {
-  if (!canManageUsers()) return toast("׳¨׳§ ׳׳“׳׳™׳ ׳™׳›׳•׳ ׳׳׳—׳•׳§ ׳׳©׳×׳׳©׳™׳");
+  if (!canManageUsers()) return toast("רק אדמין יכול למחוק משתמשים");
   state.members = state.members.filter((member) => member.id !== id || member.role === "owner");
   saveState();
   render();
@@ -1933,11 +1934,11 @@ async function signInGoogle() {
   try {
     const token = await requestGoogleToken(GOOGLE_SCOPES.profile);
     await loadGoogleProfile(token.access_token);
-    toast("׳”׳×׳—׳‘׳¨׳× ׳¢׳ Gmail");
+    toast("התחברת עם Gmail");
     render();
   } catch (error) {
     console.error(error);
-    toast(error.message || "׳”׳›׳ ׳™׳¡׳” ׳ ׳›׳©׳׳”");
+    toast(error.message || "הכניסה נכשלה");
   }
 }
 
@@ -1958,15 +1959,15 @@ async function syncCalendar() {
     const data = await googleFetch(`https://www.googleapis.com/calendar/v3/calendars/primary/events?${params}`);
     state.calendarEvents = (data.items || []).map(mapCalendarEvent);
     state.sync.calendarLastSync = new Date().toISOString();
-    state.sync.calendarStatus = "׳׳—׳•׳‘׳¨";
+    state.sync.calendarStatus = "מחובר";
     saveState();
-    toast(`׳¡׳•׳ ׳›׳¨׳ ׳• ${state.calendarEvents.length} ׳׳™׳¨׳•׳¢׳™ ׳™׳•׳׳`);
+    toast(`סונכרנו ${state.calendarEvents.length} אירועי יומן`);
     render();
   } catch (error) {
     console.error(error);
-    state.sync.calendarStatus = "׳©׳’׳™׳׳”";
+    state.sync.calendarStatus = "שגיאה";
     saveState();
-    toast(error.message || "׳¡׳ ׳›׳¨׳•׳ ׳”׳™׳•׳׳ ׳ ׳›׳©׳");
+    toast(error.message || "סנכרון היומן נכשל");
     render();
   }
 }
@@ -1984,15 +1985,15 @@ async function syncGmail() {
     const details = await Promise.all(messages.map((message) => loadGmailMessage(message.id)));
     state.mailItems = details.filter(Boolean).map(mapGmailMessage);
     state.sync.gmailLastSync = new Date().toISOString();
-    state.sync.gmailStatus = "׳׳—׳•׳‘׳¨";
+    state.sync.gmailStatus = "מחובר";
     saveState();
-    toast(`׳¡׳•׳ ׳›׳¨׳ ׳• ${state.mailItems.length} ׳׳™׳™׳׳™׳`);
+    toast(`סונכרנו ${state.mailItems.length} מיילים`);
     render();
   } catch (error) {
     console.error(error);
-    state.sync.gmailStatus = "׳©׳’׳™׳׳”";
+    state.sync.gmailStatus = "שגיאה";
     saveState();
-    toast(error.message || "׳¡׳ ׳›׳¨׳•׳ Gmail ׳ ׳›׳©׳");
+    toast(error.message || "סנכרון Gmail נכשל");
     render();
   }
 }
@@ -2010,12 +2011,12 @@ async function loadGmailMessage(id) {
 function requestGoogleToken(scopes) {
   return new Promise((resolve, reject) => {
     if (!state.settings.googleClientId) {
-      reject(new Error("׳—׳¡׳¨ Google OAuth Client ID"));
+      reject(new Error("חסר Google OAuth Client ID"));
       return;
     }
 
     if (!window.google?.accounts?.oauth2) {
-      reject(new Error("׳¡׳₪׳¨׳™׳™׳× Google ׳¢׳“׳™׳™׳ ׳׳ ׳ ׳˜׳¢׳ ׳”. ׳ ׳¡׳• ׳©׳•׳‘ ׳‘׳¢׳•׳“ ׳¨׳’׳¢."));
+      reject(new Error("ספריית Google עדיין לא נטענה. נסו שוב בעוד רגע."));
       return;
     }
 
@@ -2047,13 +2048,13 @@ async function loadGoogleProfile(accessToken) {
   });
 
   if (!response.ok) {
-    throw new Error("׳׳ ׳”׳¦׳׳—׳×׳™ ׳׳§׳¨׳•׳ ׳׳× ׳₪׳¨׳˜׳™ ׳”׳׳©׳×׳׳© ׳-Google");
+    throw new Error("לא הצלחתי לקרוא את פרטי המשתמש מ-Google");
   }
 
   const profile = await response.json();
   const email = String(profile.email || "").toLowerCase();
   if (!email.endsWith("@gmail.com")) {
-    throw new Error("׳”׳—׳©׳‘׳•׳ ׳—׳™׳™׳‘ ׳׳”׳™׳•׳× ׳›׳×׳•׳‘׳× Gmail");
+    throw new Error("החשבון חייב להיות כתובת Gmail");
   }
 
   state.currentUserEmail = email;
@@ -2062,7 +2063,7 @@ async function loadGoogleProfile(accessToken) {
   if (existing) {
     existing.name = profile.name || existing.name;
     existing.picture = profile.picture || existing.picture;
-    existing.status = "׳₪׳¢׳™׳";
+    existing.status = "פעיל";
     existing.lastActive = new Date().toISOString();
   } else {
     state.members.push({
@@ -2070,7 +2071,7 @@ async function loadGoogleProfile(accessToken) {
       email,
       name: profile.name || email.split("@")[0],
       role: state.members.some((member) => member.role === "owner" || member.role === "admin") ? "user" : "owner",
-      status: "׳₪׳¢׳™׳",
+      status: "פעיל",
       picture: profile.picture || "",
       lastActive: new Date().toISOString(),
     });
@@ -2080,13 +2081,13 @@ async function loadGoogleProfile(accessToken) {
 }
 
 async function googleFetch(url) {
-  if (!runtime.accessToken) throw new Error("׳¦׳¨׳™׳ ׳׳”׳×׳—׳‘׳¨ ׳-Google ׳׳—׳“׳©");
+  if (!runtime.accessToken) throw new Error("צריך להתחבר ל-Google מחדש");
   const response = await fetch(url, {
     headers: { Authorization: `Bearer ${runtime.accessToken}` },
   });
   if (!response.ok) {
     const text = await response.text();
-    throw new Error(`Google ׳”׳—׳–׳™׳¨׳” ׳©׳’׳™׳׳” (${response.status}): ${text.slice(0, 120)}`);
+    throw new Error(`Google החזירה שגיאה (${response.status}): ${text.slice(0, 120)}`);
   }
   return response.json();
 }
@@ -2096,7 +2097,7 @@ function mapCalendarEvent(event) {
   const start = event.start?.dateTime || event.start?.date || "";
   return {
     id: event.id,
-    title: event.summary || "׳׳™׳¨׳•׳¢ ׳׳׳ ׳©׳",
+    title: event.summary || "אירוע ללא שם",
     date: start.slice(0, 10) || localISO(0),
     time: event.start?.dateTime ? start.slice(11, 16) : "",
     categoryId: guessCategory(text),
@@ -2138,14 +2139,14 @@ function importEventAsTask(id) {
     childIds: event.childIds.length ? event.childIds : state.children.map((child) => child.id),
     dueDate: event.date,
     dueTime: event.time,
-    priority: "׳¨׳’׳™׳׳”",
+    priority: "רגילה",
     status: "open",
-    notes: event.link ? `׳ ׳•׳¦׳¨ ׳׳׳™׳¨׳•׳¢ Google Calendar: ${event.link}` : "׳ ׳•׳¦׳¨ ׳׳׳™׳¨׳•׳¢ Google Calendar",
+    notes: event.link ? `נוצר מאירוע Google Calendar: ${event.link}` : "נוצר מאירוע Google Calendar",
     source: "Google Calendar",
     createdBy: currentMember()?.email || "Google Calendar",
   });
   saveState();
-  toast("׳”׳׳™׳¨׳•׳¢ ׳ ׳•׳¡׳£ ׳›׳׳©׳™׳׳”");
+  toast("האירוע נוסף כמשימה");
   render();
 }
 
@@ -2154,19 +2155,19 @@ function importMailAsTask(id) {
   if (!mail) return;
   state.tasks.unshift({
     id: uid(),
-    title: mail.subject || "׳׳™׳™׳ ׳׳˜׳™׳₪׳•׳",
+    title: mail.subject || "מייל לטיפול",
     categoryId: mail.categoryId,
     childIds: mail.childIds.length ? mail.childIds : state.children.map((child) => child.id),
     dueDate: localISO(1),
     dueTime: "",
-    priority: "׳¨׳’׳™׳׳”",
+    priority: "רגילה",
     status: "open",
     notes: `${mail.from || ""}\n${mail.snippet || ""}`.trim(),
     source: "Gmail",
     createdBy: currentMember()?.email || "Gmail",
   });
   saveState();
-  toast("׳”׳׳™׳™׳ ׳ ׳•׳¡׳£ ׳›׳׳©׳™׳׳”");
+  toast("המייל נוסף כמשימה");
   render();
 }
 
@@ -2222,8 +2223,8 @@ function childById(id) {
 }
 
 function childrenNames(ids = []) {
-  if (!ids.length) return "׳›׳ ׳”׳׳©׳₪׳—׳”";
-  return ids.map((id) => childById(id)?.name).filter(Boolean).join(", ") || "׳›׳ ׳”׳׳©׳₪׳—׳”";
+  if (!ids.length) return "כל המשפחה";
+  return ids.map((id) => childById(id)?.name).filter(Boolean).join(", ") || "כל המשפחה";
 }
 
 function renderTinyAvatar(childId) {
@@ -2241,10 +2242,10 @@ function guessChildren(text = "") {
 function guessCategory(text = "") {
   const lower = text.toLowerCase();
   const rules = [
-    ["medical", ["׳¨׳•׳₪׳", "׳¨׳•׳₪׳׳”", "׳¨׳₪׳•׳׳”", "׳×׳•׳¨", "׳׳¨׳₪׳׳”", "׳§׳•׳₪׳”", "׳—׳™׳¡׳•׳", "׳‘׳“׳™׳§׳”"]],
-    ["school", ["׳‘׳™׳× ׳¡׳₪׳¨", "׳‘׳™׳”׳¡", "׳›׳™׳×׳”", "׳׳—׳ ׳›׳×", "׳˜׳™׳•׳", "׳׳™׳¨׳•׳¢", "׳׳¡׳™׳₪׳×", "׳’׳"]],
-    ["activities", ["׳—׳•׳’", "׳׳™׳׳•׳", "׳›׳“׳•׳¨׳’׳", "׳¨׳™׳§׳•׳“", "׳©׳—׳™׳™׳”", "׳₪׳¡׳ ׳×׳¨", "׳’׳³׳•׳“׳•", "׳’'׳•׳“׳•"]],
-    ["family", ["׳©׳‘׳×", "׳—׳’", "׳—׳’׳™׳", "׳׳©׳₪׳—׳”", "׳¡׳‘׳×׳", "׳¡׳‘׳", "׳§׳™׳“׳•׳©"]],
+    ["medical", ["רופא", "רופאה", "רפואה", "תור", "מרפאה", "קופה", "חיסון", "בדיקה"]],
+    ["school", ["בית ספר", "ביהס", "כיתה", "מחנכת", "טיול", "אירוע", "אסיפת", "גן"]],
+    ["activities", ["חוג", "אימון", "כדורגל", "ריקוד", "שחייה", "פסנתר", "ג׳ודו", "ג'ודו"]],
+    ["family", ["שבת", "חג", "חגים", "משפחה", "סבתא", "סבא", "קידוש"]],
   ];
   return rules.find(([, words]) => words.some((word) => lower.includes(word)))?.[0] || "family";
 }
@@ -2261,21 +2262,21 @@ function canManageUsers() {
 
 function roleLabel(role) {
   return {
-    owner: "׳׳“׳׳™׳ ׳¨׳׳©׳™",
-    admin: "׳׳“׳׳™׳",
-    user: "׳׳©׳×׳׳©",
-  }[role] || "׳׳©׳×׳׳©";
+    owner: "אדמין ראשי",
+    admin: "אדמין",
+    user: "משתמש",
+  }[role] || "משתמש";
 }
 
 function viewTitle(view) {
   return {
-    home: "׳“׳©׳‘׳•׳¨׳“ ׳׳©׳₪׳—׳×׳™",
-    calendar: "׳׳•׳— ׳©׳ ׳” ׳׳©׳₪׳—׳×׳™",
-    tasks: "׳׳©׳™׳׳•׳×",
-    kids: "׳₪׳¨׳•׳₪׳™׳׳™ ׳™׳׳“׳™׳",
-    sync: "׳¡׳ ׳›׳¨׳•׳ Gmail ׳•׳™׳•׳׳",
-    users: "׳ ׳™׳”׳•׳ ׳׳©׳×׳׳©׳™׳",
-  }[view] || "׳§׳™׳¨ ׳”׳‘׳™׳×";
+    home: "דשבורד משפחתי",
+    calendar: "לוח שנה משפחתי",
+    tasks: "משימות",
+    kids: "פרופילי ילדים",
+    sync: "סנכרון Gmail ויומן",
+    users: "ניהול משתמשים",
+  }[view] || "קיר הבית";
 }
 
 function uid() {
@@ -2299,7 +2300,7 @@ function addDays(date, days) {
 }
 
 function formatDate(value) {
-  if (!value) return "׳׳׳ ׳×׳׳¨׳™׳";
+  if (!value) return "ללא תאריך";
   return new Intl.DateTimeFormat("he-IL", { day: "2-digit", month: "2-digit", year: "numeric" }).format(new Date(`${value}T12:00:00`));
 }
 
