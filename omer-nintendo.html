@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מבצע נינטנדו של עומר</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Heebo:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070914;
+      --card: #11162a;
+      --card2: #171d36;
+      --blue: #00d9ff;
+      --purple: #9b5cff;
+      --green: #28ff8a;
+      --yellow: #ffe94d;
+      --text: #ffffff;
+      --muted: #aab3d6;
+      --gray: #33384f;
+      --danger: #ff4d6d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(0,217,255,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 10% 90%, rgba(155,92,255,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 50% 50%, rgba(40,255,138,0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Floating pixel decorations */
+    .pixel-deco {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.3;
+      animation: floatPx 8s ease-in-out infinite;
+    }
+    .pixel-deco:nth-child(1) { top: 10%; left: 5%; font-size: 2rem; animation-delay: 0s; }
+    .pixel-deco:nth-child(2) { top: 30%; right: 4%; font-size: 1.5rem; animation-delay: 2s; }
+    .pixel-deco:nth-child(3) { bottom: 20%; left: 8%; font-size: 1.8rem; animation-delay: 4s; }
+    .pixel-deco:nth-child(4) { bottom: 35%; right: 6%; font-size: 2.2rem; animation-delay: 1s; }
+    .pixel-deco:nth-child(5) { top: 55%; left: 3%; font-size: 1.2rem; animation-delay: 3s; }
+
+    @keyframes floatPx {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+
+    .container {
+      max-width: 1050px;
+      margin: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HEADER */
+    header {
+      text-align: center;
+      padding: 36px 24px 28px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(0,217,255,0.12) 0%, rgba(155,92,255,0.15) 50%, rgba(40,255,138,0.10) 100%);
+      border: 1px solid rgba(255,255,255,0.13);
+      box-shadow: 0 0 60px rgba(0,217,255,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent 0deg, rgba(0,217,255,0.04) 60deg, transparent 120deg);
+      animation: spin 20s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2.2rem, 7vw, 4.5rem);
+      background: linear-gradient(135deg, var(--blue), var(--green), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      position: relative;
+      z-index: 1;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-top: 10px;
+      position: relative;
+      z-index: 1;
+      font-weight: 600;
+    }
+
+    /* SECTIONS */
+    section {
+      background: rgba(17, 22, 42, 0.9);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 28px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 30px rgba(155,92,255,0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.6rem;
+      color: var(--blue);
+      margin-bottom: 18px;
+      text-shadow: 0 0 20px rgba(0,217,255,0.5);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* STATS GRID */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .stat {
+      background: linear-gradient(145deg, #141929, #0d1022);
+      border-radius: 20px;
+      padding: 18px 14px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.07);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .stat:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(40,255,138,0.15); }
+
+    .stat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      border-radius: 999px 999px 0 0;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat strong {
+      display: block;
+      font-family: 'Fredoka One', cursive;
+      color: var(--green);
+      font-size: 1.9rem;
+      margin-top: 6px;
+      text-shadow: 0 0 15px rgba(40,255,138,0.5);
+    }
+
+    /* PROGRESS BAR */
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .progress-wrap {
+      background: #050711;
+      border-radius: 999px;
+      height: 38px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--green), var(--blue), var(--purple));
+      border-radius: 999px;
+      transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 20px rgba(40,255,138,0.5), 0 0 40px rgba(0,217,255,0.3);
+      position: relative;
+    }
+
+    .progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 4px; bottom: 4px;
+      left: 8px; right: 8px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      border-radius: 999px;
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+
+    /* INPUT & CONTROLS */
+    .input-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    input[type="number"] {
+      flex: 1;
+      min-width: 120px;
+      padding: 13px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: #090d1c;
+      color: white;
+      font-size: 1rem;
+      font-family: 'Heebo', sans-serif;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input[type="number"]:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 15px rgba(0,217,255,0.2);
+    }
+
+    button {
+      border: 0;
+      border-radius: 16px;
+      padding: 13px 20px;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: 'Heebo', sans-serif;
+      font-size: 0.95rem;
+      color: #06101a;
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      box-shadow: 0 4px 18px rgba(0,217,255,0.3);
+      transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+      white-space: nowrap;
+    }
+
+    button:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 6px 28px rgba(40,255,138,0.45);
+      filter: brightness(1.1);
+    }
+
+    button:active { transform: scale(0.97); }
+
+    button.danger {
+      background: linear-gradient(135deg, var(--danger), #ff9f1c);
+      box-shadow: 0 4px 18px rgba(255,77,109,0.3);
+      color: white;
+    }
+
+    button.danger:hover { box-shadow: 0 6px 28px rgba(255,77,109,0.45); }
+
+    /* CELEBRATION */
+    .celebration {
+      display: none;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--green);
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(40,255,138,0.1);
+      border: 1px solid rgba(40,255,138,0.4);
+      margin-top: 16px;
+      animation: celebPulse 1s ease-in-out infinite;
+    }
+
+    @keyframes celebPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(40,255,138,0.3); }
+      50% { box-shadow: 0 0 40px rgba(40,255,138,0.6); }
+    }
+
+    /* MILESTONES */
+    .milestones {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+      gap: 8px;
+    }
+
+    .milestone {
+      background: #0f1423;
+      color: #4a5168;
+      padding: 12px 6px;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      line-height: 1.5;
+    }
+
+    .milestone.done {
+      color: var(--green);
+      border-color: rgba(40,255,138,0.4);
+      background: rgba(40,255,138,0.07);
+      box-shadow: 0 0 15px rgba(40,255,138,0.25);
+      transform: scale(1.04);
+    }
+
+    /* MISSIONS */
+    .missions {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .mission {
+      background: linear-gradient(145deg, #131936, #0d1125);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 18px;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .mission:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(155,92,255,0.2);
+      border-color: rgba(155,92,255,0.3);
+    }
+
+    .mission-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #cdd4f0;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .reward {
+      font-family: 'Fredoka One', cursive;
+      color: var(--yellow);
+      font-size: 1.5rem;
+      text-shadow: 0 0 15px rgba(255,233,77,0.5);
+    }
+
+    .mission button {
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      background: linear-gradient(135deg, rgba(155,92,255,0.3), rgba(0,217,255,0.2));
+      color: var(--text);
+      border: 1px solid rgba(155,92,255,0.4);
+      box-shadow: none;
+    }
+
+    .mission button:hover {
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      color: #06101a;
+      box-shadow: 0 4px 18px rgba(155,92,255,0.4);
+    }
+
+    /* BADGES */
+    .badges {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 14px;
+    }
+
+    .badge {
+      background: #0f1423;
+      color: #4a5168;
+      text-align: center;
+      border-radius: 22px;
+      padding: 22px 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      font-weight: 700;
+      line-height: 1.6;
+      font-size: 0.9rem;
+      transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .badge .badge-icon { font-size: 1.8rem; display: block; margin-bottom: 6px; filter: grayscale(1); transition: filter 0.5s; }
+
+    .badge.unlocked {
+      color: white;
+      background: linear-gradient(145deg, rgba(40,255,138,0.15), rgba(0,217,255,0.12));
+      border-color: rgba(40,255,138,0.4);
+      box-shadow: 0 0 25px rgba(40,255,138,0.3);
+      transform: scale(1.04);
+    }
+
+    .badge.unlocked .badge-icon { filter: grayscale(0); animation: iconBounce 0.6s ease; }
+
+    @keyframes iconBounce {
+      0% { transform: scale(0.5) rotate(-20deg); }
+      60% { transform: scale(1.3) rotate(10deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    /* CONTROLS SECTION */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .control-block {
+      background: #0d1122;
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .control-block h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 12px; }
+      section { padding: 18px; }
+      .controls-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 2rem; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Floating decorations -->
+  <div class="pixel-deco">🎮</div>
+  <div class="pixel-deco">⭐</div>
+  <div class="pixel-deco">🪙</div>
+  <div class="pixel-deco">🎯</div>
+  <div class="pixel-deco">💎</div>
+
+  <div class="container">
+    <header>
+      <h1>מבצע נינטנדו של עומר 🎮</h1>
+      <div class="subtitle">עומר חוסך חצי מהסכום – ואבא משלים את השאר!</div>
+    </header>
+
+    <!-- PROGRESS -->
+    <section>
+      <h2>📊 לוח התקדמות</h2>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-label">היעד</div>
+          <strong>1,200 ₪</strong>
+        </div>
+        <div class="stat">
+          <div class="stat-label">נחסך עד עכשיו</div>
+          <strong id="saved">0 ₪</strong>
+        </div>
+        <div class="stat">
+          <div class="stat-label">נשאר לחסוך</div>
+          <strong id="remaining" style="color:var(--blue)">1,200 ₪</strong>
+        </div>
+        <div class="stat">
+          <div class="stat-label">התקדמות</div>
+          <strong id="percent" style="color:var(--purple)">0%</strong>
+        </div>
+      </div>
+
+      <div class="progress-label">
+        <span>0 ₪</span>
+        <span id="progressPct">0%</span>
+        <span>1,200 ₪</span>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="input-group" style="margin-top:14px">
+        <input type="number" id="manualAmount" min="0" max="1200" placeholder="הכנס סכום ידני..." />
+        <button onclick="setManualAmount()">🎯 עדכן</button>
+      </div>
+
+      <div class="celebration" id="celebration">
+        🎉 אלוף! עומר הגיע ליעד! אבא משלים את השאר! 🎮🏆
+      </div>
+    </section>
+
+    <!-- MILESTONES -->
+    <section>
+      <h2>🏁 אבני דרך</h2>
+      <div class="milestones" id="milestones"></div>
+    </section>
+
+    <!-- MISSIONS -->
+    <section>
+      <h2>🎯 לוח משימות</h2>
+      <div class="missions" id="missions"></div>
+    </section>
+
+    <!-- BADGES -->
+    <section>
+      <h2>🏆 הישגים ובאדג׳ים</h2>
+      <div class="badges" id="badges"></div>
+    </section>
+
+    <!-- CONTROLS -->
+    <section>
+      <h2>⚙️ בקרות</h2>
+      <div class="controls-grid">
+        <div class="control-block">
+          <h3>הוסף סכום מיוחד</h3>
+          <div class="input-group">
+            <input type="number" id="customAmount" placeholder="כמה ₪?" />
+            <button onclick="addCustomAmount()">➕</button>
+          </div>
+        </div>
+        <div class="control-block">
+          <h3>איפוס</h3>
+          <button class="danger" onclick="resetProgress()" style="width:100%">🗑️ איפוס התקדמות</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const goal = 1200;
+    let savings = Number(localStorage.getItem("omerSavings") || 0);
+
+    const tasks = [
+      ["קיפול כביסה של סל אחד", 5],
+      ["סידור מלא של החדר", 5],
+      ["פינוי מדיח כלים", 4],
+      ["עריכת שולחן לארוחה משפחתית", 3],
+      ["ניקוי שולחן האוכל לאחר ארוחה", 3],
+      ["איסוף צעצועים וסידור הסלון", 4],
+      ["השקיית עציצים", 2],
+      ["הוצאת אשפה ופח מחזור", 3],
+      ["שטיפת הרכב עם אבא", 15],
+      ["ניקוי יסודי של החדר כולל אבק", 15],
+      ["סידור ארון בגדים", 12],
+      ["עזרה בקניות ופריקת שקיות", 10],
+      ["ניקוי שולחן כתיבה וספרים", 10],
+      ["ניקוי אופניים", 10],
+      ["עזרה בפרויקט ביתי מיוחד", 20],
+      ["ניקוי חצר או מרפסת", 20],
+      ["ארגון פינת משחקים", 20]
+    ];
+
+    const achievements = [
+      ["🌱", "100 ₪ ראשונים", 100],
+      ["⚡", "רבע דרך – 250 ₪", 250],
+      ["🌟", "חצי דרך – 600 ₪", 600],
+      ["🔥", "1,000 ₪", 1000],
+      ["🏆", "היעד הושלם!", 1200]
+    ];
+
+    function save() {
+      savings = Math.min(Math.max(savings, 0), goal);
+      localStorage.setItem("omerSavings", savings);
+      updateUI();
+    }
+
+    function updateUI() {
+      const percent = Math.floor((savings / goal) * 100);
+      const remaining = Math.max(goal - savings, 0);
+
+      document.getElementById("saved").textContent = savings.toLocaleString('he-IL') + " ₪";
+      document.getElementById("remaining").textContent = remaining.toLocaleString('he-IL') + " ₪";
+      document.getElementById("percent").textContent = percent + "%";
+      document.getElementById("progressPct").textContent = percent + "%";
+      document.getElementById("progressBar").style.width = percent + "%";
+      document.getElementById("celebration").style.display = savings >= goal ? "block" : "none";
+
+      renderMilestones();
+      renderBadges();
+    }
+
+    function renderMilestones() {
+      const box = document.getElementById("milestones");
+      box.innerHTML = "";
+      for (let i = 1; i <= 24; i++) {
+        const amount = i * 50;
+        const done = savings >= amount;
+        const div = document.createElement("div");
+        div.className = "milestone" + (done ? " done" : "");
+        div.innerHTML = done ? `✅<br>${amount}₪` : `🔒<br>${amount}₪`;
+        box.appendChild(div);
+      }
+    }
+
+    function renderMissions() {
+      const box = document.getElementById("missions");
+      box.innerHTML = "";
+      tasks.forEach(([name, reward]) => {
+        const card = document.createElement("div");
+        card.className = "mission";
+        card.innerHTML = `
+          <div class="mission-title">🎯 ${name}</div>
+          <div class="reward">+${reward} ₪</div>
+          <button onclick="completeMission(${reward})">✅ סיימתי!</button>
+        `;
+        box.appendChild(card);
+      });
+    }
+
+    function renderBadges() {
+      const box = document.getElementById("badges");
+      box.innerHTML = "";
+      achievements.forEach(([icon, title, amount]) => {
+        const unlocked = savings >= amount;
+        const badge = document.createElement("div");
+        badge.className = "badge" + (unlocked ? " unlocked" : "");
+        badge.innerHTML = `<span class="badge-icon">${unlocked ? icon : "🔒"}</span>${title}`;
+        box.appendChild(badge);
+      });
+    }
+
+    function completeMission(amount) {
+      savings += amount;
+      save();
+    }
+
+    function setManualAmount() {
+      const value = Number(document.getElementById("manualAmount").value);
+      if (!isNaN(value) && document.getElementById("manualAmount").value !== "") {
+        savings = value;
+        document.getElementById("manualAmount").value = "";
+        save();
+      }
+    }
+
+    function addCustomAmount() {
+      const value = Number(document.getElementById("customAmount").value);
+      if (!isNaN(value) && value > 0) {
+        savings += value;
+        document.getElementById("customAmount").value = "";
+        save();
+      }
+    }
+
+    function resetProgress() {
+      if (confirm("בטוח לאפס את כל ההתקדמות של עומר?")) {
+        savings = 0;
+        save();
+      }
+    }
+
+    renderMissions();
+    updateUI();
+  </script>
+</body>
+</html>
